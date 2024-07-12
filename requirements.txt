@@ -16,7 +16,7 @@ Flask-Marshmallow==0.15.0
 # Dependencies missed in previous update
 Werkzeug==2.3.7  # Needed for core Flask functionalities
 WTForms==3.0.1  # Needed for form handling
-email-validator==24.1.2
+email-validator==1.3.1
 
 # Additional useful dependencies
 Flask-Migrate==3.1.0  # Database migrations
