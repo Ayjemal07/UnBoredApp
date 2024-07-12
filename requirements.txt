@@ -1,0 +1,25 @@
+Flask==2.0.2
+Flask-SQLAlchemy==3.0.1
+python-dotenv==1.0.1
+openai==0.10.0
+google-api-python-client==2.38.0
+psycopg2-binary==2.9.3
+
+
+# Login functionality
+Flask-Login==0.6.3
+
+# Data serialization
+Flask-Marshmallow==0.15.0 
+
+
+# Dependencies missed in previous update
+Werkzeug==2.3.7  # Needed for core Flask functionalities
+WTForms==3.0.1  # Needed for form handling
+email-validator==24.1.2
+
+# Additional useful dependencies
+Flask-Migrate==3.1.0  # Database migrations
+marshmallow-sqlalchemy==0.28.1  # Object serialization/deserialization
+
+

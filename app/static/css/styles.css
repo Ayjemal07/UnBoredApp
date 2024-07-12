@@ -1,0 +1,263 @@
+body, html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+body {
+    /* padding-top: 100px;  */
+    font-family: Arial, sans-serif;
+}
+
+
+.container {
+    /* position: relative; */
+    text-align: center;
+    margin-bottom: 350px;
+    margin-top: 120px;
+}
+
+.suggestion-button, .next-suggest {
+    display: inline-block; /* Ensure both buttons are inline-block */
+    padding: 40px 60px; /* Increase padding for a bigger button */
+    font-size: 30px; /* Increase font size for larger text */
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, #4caf50, #7bdcb5); /* Greenish bright gradient */
+    border: none;
+    border-radius: 10px; /* Increase border-radius for a more rounded button */
+    cursor: pointer;
+    transition: background 0.3s ease; /* Smooth transition for hover effect */
+    margin: 20px 0; /* Add margin for spacing */
+    margin-top: 50px;
+}
+
+@keyframes flash {
+    0%, 100% {
+        background: linear-gradient(90deg, #4caf50, #7bdcb5); /* Greenish bright gradient */
+    }
+    50% {
+        background: linear-gradient(90deg, #7bdcb5, #4caf50); /* Inverse gradient background */
+    }
+}
+
+.suggestion-button {
+    animation: flash 1s infinite;
+}
+
+.suggestion-button:hover, .next-suggest:hover {
+    animation: none; /* Stop flashing animation on hover */
+    background: linear-gradient(90deg, #45a049, #76dc78); /* Different gradient on hover */
+}
+
+/* Ensure next-suggest is hidden initially */
+.next-suggest {
+    display: none; /* Initially hidden */
+    margin-top: 20px; /* Space between cards and button */
+}
+
+
+.slider-container {
+    margin-top: 500px;
+    position: relative;
+    width: 100%; /* Adjust this as needed */
+    max-width: 1200px; /* Adjust to your desired max width */
+    margin: auto;
+    background-color: rgb(181, 216, 181);
+    display: flex;
+    align-items: center;
+}
+
+
+.slider {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.card__subtitle,
+.card__title {
+    display: block; /* Display subtitle and title as block elements */
+}
+
+.slider__title {
+    font-size: 20px;
+    margin-bottom: 16px; /* Add space below title */
+}
+
+.slider__subtitle {
+    font-size: 16px;
+    margin-bottom: 8px; /* Add space below subtitle */
+}
+
+
+
+
+.slider__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.slider__item {
+    flex: 0 0 auto;
+    margin-right: 10px; /* Adjust the gap between items */
+}
+
+.card {
+    width: 250px; /* Set a fixed width for the card */
+    height: 350px; /* Set a fixed height for the card */
+    padding: 20px; /* Add padding to the card */
+    border: 4px solid #7bbd00;
+    border-radius: 12px;
+    background-color: white; /* Background color of the card */
+    color:black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly between header, content, and footer */
+    box-sizing: border-box;
+}
+
+
+.card__thumbnail {
+    width: 100%;
+    height: 150px; /* Set a fixed height for the image container */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 8px;
+}
+
+
+.card__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the whole area without stretching */
+}
+
+.card__header {
+    flex-grow: 1;
+}
+
+.card__title {
+    font-size: 16px;
+    margin: 10px 0 0;
+}
+
+.card__subtitle {
+    font-size: 18px;
+    font-weight:600;
+    margin: 0;
+    word-wrap: break-word;
+    color:rgb(20, 71, 20);
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.prev-button {
+    left: -13px;
+}
+
+.next-button {
+    right: -93px;
+}
+
+
+
+.activity-card {
+    border: 1px solid #ddd; /* Border color for the activity card */
+    border-radius: 8px; /* Rounded corners for the card */
+    padding: 20px; /* Padding inside the card */
+    margin-bottom: 20px; /* Margin between cards */
+    background-color: #f9f9f9; /* Background color for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a slight elevation effect */
+
+    /* Ensure text doesn't overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.activity-card h2 {
+    font-size: 24px; /* Font size for the activity name */
+    margin-bottom: 10px; /* Bottom margin for the activity name */
+    color: #333; /* Text color for the activity name */
+}
+
+.activity-card p {
+    font-size: 16px; /* Font size for the description and reason */
+    margin-bottom: 10px; /* Bottom margin for paragraphs */
+    line-height: 1.5; /* Line height for better readability */
+}
+
+.activity-card a {
+    display: block; /* Ensure links stack vertically */
+    margin-top: 5px; /* Top margin between links */
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove default underline */
+}
+
+.activity-card a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+.navigation {
+    list-style: none; /* Remove default bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 15px 20px; /* Add padding for spacing */
+    display: flex; /* Arrange items horizontally */
+    align-items: center; /* Align items vertically */
+    background-color: #aabbaa; /* Optional background color */
+    justify-content: space-between; /* Space out header and nav items */
+}
+
+.navigation header {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.navigation ul {
+    display: flex; /* Arrange items horizontally */
+    list-style: none; /* Remove default bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.navigation li {
+    margin-left: 20px; /* Add space between list items */
+}
+
+.navigation a {
+    text-decoration: none; /* Remove underline from links */
+    color: #2d333a; /* Link text color */
+    padding: 5px 10px; /* Padding for links */
+}

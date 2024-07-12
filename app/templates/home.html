@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %} 
+<div class="container mt-5">
+    <h1>Feeling Bored? Try this: </h1>
+    <button id="suggest-button" class="suggestion-button" >Suggest an Activity</button>
+    <div id="activity-container" class="activity-container">
+        <!-- Activity details will be dynamically inserted here -->
+    </div>
+    <button id="next-suggest" class="next-suggest"> Next suggestion </button>
+</div>
+
+<div class="slider-container">
+    <h2> Top Picks </h2>
+    <div class="slider">
+        <button class="nav-button prev-button" aria-label="Previous slide">❮</button>
+        <div class="slider" id="slider">
+            <ul class="slider__list">
+                <li class="slider__item">
+                    <article class="card">
+                        <div class="card__thumbnail">
+                            <img alt="" src="./static/images/Pickleball.jpg">
+                        </div>
+                        <header>
+                            <div class="card__heading">
+                                <p role="heading" aria-level="3">
+                                    <span class="card__subtitle">PICKLE BALL</span>
+                                    <span class="card__title">A fun and social game that improves agility, coordination, and cardiovascular health </span>
+                                    
+                                </p>
+                            </div>
+                        </header>
+                        <footer class="card__footer">
+                            <a class="button" href="#" aria-label="ENAGE NOW">ENGAGE NOW</a>
+                        </footer>
+                    </article>
+                </li>
+                <li class="slider__item">
+                    <article class="card">
+                        <div class="card__thumbnail">
+                            <img alt="" src="./static/images/Puzzle Swap.jpg">
+                        </div>
+                        <header>
+                            <div class="card__heading">
+                                <p role="heading" aria-level="3">
+                                    <span class="card__subtitle">PUZZLE SWAP</span>
+                                    <span class="card__title">Exchange puzzles with friends or family to try new ones.</span>
+                                </p>
+                            </div>
+                        </header>
+                        <footer class="card__footer">
+                            <a class="button" href="#" aria-label="ENGAGE NOW">ENGAGE NOW</a>
+                        </footer>
+                    </article>
+                </li>
+
+                <li class="slider__item">
+                    <article class="card">
+                        <div class="card__thumbnail">
+                            <img alt="" src="./static/images/taichi.webp">
+                        </div>
+                        <header>
+                            <div class="card__heading">
+                                <p role="heading" aria-level="3">
+                                    <span class="card__subtitle">TAI CHI</span>
+                                    <span class="card__title">Try gentle tai chi movements to improve balance, flexibility, and relaxation.</span>
+                                </p>
+                        </div>
+                    </header>
+                        <footer class="card__footer">
+                            <a class="button" href="#" aria-label="ENGAGE NOW">ENGAGE NOW</a>
+                        </footer>
+                    </article>
+                </li>
+
+                <li class="slider__item">
+                    <article class="card">
+                        <div class="card__thumbnail">
+                            <img alt="" src="./static/images/Murder Mystery Night.jpg">
+                        </div>
+                        <header>
+                            <div class="card__heading">
+                                <p role="heading" aria-level="3">
+                                    <span class="card__subtitle">MURDER MYSTERY NIGHT</span>
+                                    <span class="card__title">Organize or attend a murder mystery game night where everyone plays a character.</span>
+                                </p>
+                            </div>
+                        </header>
+                        <footer class="card__footer">
+                            <a class="button" href="#" aria-label="ENGAGE NOW">ENGAGE NOW</a>
+                        </footer>
+                    </article>
+                </li>
+
+                <li class="slider__item">
+                    <article class="card">
+                        <div class="card__thumbnail">
+                            <img alt="" src="./static/images/stargazing.jpeg">
+                        </div>
+                        <header>
+                            <div class="card__heading">
+                                <p role="heading" aria-level="3">
+                                    <span class="card__subtitle">STARGAZING</span>
+                                    <span class="card__title">Spend an evening stargazing and learning about constellations.</span>
+                                </p>
+                            </div>
+                        </header>
+                        <footer class="card__footer">
+                            <a class="button" href="#" aria-label="ENGAGE NOW">ENGAGE NOW</a>
+                        </footer>
+                    </article>
+                </li>
+            </ul>
+        </div>
+        <button class="nav-button next-button" aria-label="Next slide">❯</button>
+    </div>
+</div>    
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

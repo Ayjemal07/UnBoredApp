@@ -1,0 +1,44 @@
+# #buy credits to use chatGPT Api, and get your secret key and set environment variable in your terminal
+# or create .env file for all secret keys and put them all to .gitignore 
+# # by using this command: setx open_ai_key="your_secret_key"
+
+#create a virtual env by running "python -m venv openai-env"
+# run "pip install openai flask" command for OpenAI python client library
+#this library provide the tools and functions needed to interact with OpenAi's API
+#generating completions, handling API keys, and managing requests and responses from ai models
+
+
+# now inside your code import OpenAi class from openai library:
+# from openai import OpenAI
+
+# #retrieve the value of env var
+# api_key = os.getenv('OPENAI_API_KEY')
+
+# if api_key is None:
+#     raise ValueError("OPENAI_API_KEY environment variable is not set")
+
+
+# #create(initialize) an instance of the OpenAi class using api_key
+# client = OpenAI(api_key=api_key)
+
+
+# #client instance is now making requests to OPENAI Api
+# #completion makes a call to create chat completion
+# completion = client.chat.completions.create(
+#     model="gpt-3.5-turbo",
+#     messages=[
+#         {"role": "system",
+#          "content": "You are a strict mathematics professor who explains students concepts in spanish."
+#          },
+#         {
+#             "role": "user",
+#             "content": "What is trignometry?"
+#         }
+#     ]
+# )
+
+
+# #message.content: Retrieves the content of the message in that choice, 
+# #which is the assistant's response to the user's query.
+
+# print(completion.choices[0].message.content)
