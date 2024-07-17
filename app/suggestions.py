@@ -2,6 +2,8 @@
 
 from flask import Blueprint, jsonify, render_template, session, request
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
 from openai import OpenAI
 import os
 from random import choice
@@ -14,58 +16,61 @@ client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 
 def get_youtube_link(activity_name):
-  
-  """
-  Gets a YouTube video link for the given activity name, using broader search and ranking.
+    """
+    Gets a YouTube video link for the given activity name, using broader search and ranking.
+    If quota is exceeded, returns a YouTube search link.
 
-  Args:
-      activity_name: The name of the activity.
+    Args:
+        activity_name: The name of the activity.
 
-  Returns:
-      A string containing the YouTube video link or an empty string if not found.
-  """
+    Returns:
+        A string containing the YouTube video link or a YouTube search link if quota is exceeded.
+    """
 
-  youtube_api_key = os.getenv('YOUTUBE_API_KEY')
-  if not youtube_api_key:
-      raise ValueError("YouTube API key not found in environment variables")
+    youtube_api_key = os.getenv('YOUTUBE_API_KEY')
+    if not youtube_api_key:
+        raise ValueError("YouTube API key not found in environment variables")
 
-  youtube = build('youtube', 'v3', developerKey=youtube_api_key)
+    youtube = build('youtube', 'v3', developerKey=youtube_api_key)
 
-  # 1. Broad Search with Activity Variations
-  search_terms = [
-      activity_name,
-      f"how to do {activity_name}",
-      f"how to play {activity_name}",
-      f"{activity_name} tutorial"
-  ]
+    search_terms = [
+        activity_name,
+        f"What is {activity_name}",
+        f"how to {activity_name}"
+    ]
 
-  # 2. Search and Rank Results (same logic as before)
-  candidate_videos = []
-  for term in search_terms:
-      request = youtube.search().list(
-          q=term,
-          part='snippet',
-          maxResults=5  # Increase results for broader search
-      )
-      response = request.execute()
-      if response['items']:
-          for item in response['items']:
-            video_id = item['id'].get('videoId')
-            if not video_id:
-                continue
-            view_count = int(item['snippet'].get('viewCount', 0))
-            like_count = int(item['snippet'].get('likeCount', 0))
-            score = view_count + like_count
-            candidate_videos.append((video_id, score))
+    try:
+        candidate_videos = []
+        for term in search_terms:
+            request = youtube.search().list(
+                q=term,
+                part='snippet',
+                maxResults=5  # Increase results for broader search
+            )
+            response = request.execute()
+            if response['items']:
+                for item in response['items']:
+                    video_id = item['id'].get('videoId')
+                    if not video_id:
+                        continue
+                    view_count = int(item['snippet'].get('viewCount', 0))
+                    like_count = int(item['snippet'].get('likeCount', 0))
+                    score = view_count + like_count
+                    candidate_videos.append((video_id, score))
 
-  # 3. Select Top Ranked Video (if any)
-  if candidate_videos:
-      candidate_videos.sort(key=lambda x: x[1], reverse=True)
-      return f'https://www.youtube.com/watch?v={candidate_videos[0][0]}'
+        if candidate_videos:
+            candidate_videos.sort(key=lambda x: x[1], reverse=True)
+            return f'https://www.youtube.com/watch?v={candidate_videos[0][0]}'
 
-  # 4. Handle No Suitable Videos Found
-  print(f"No suitable video found for '{activity_name}'.")
-  return ''
+        print(f"No suitable video found for '{activity_name}'.")
+        return ''
+
+    except HttpError as e:
+        if e.resp.status == 403 and 'quotaExceeded' in e.content.decode():
+            print("YouTube quota exceeded.")
+            return f'https://www.youtube.com/results?search_query=what+is+{activity_name}'
+
+        raise
 
 
 
@@ -103,13 +108,13 @@ def get_chatgpt_activity(exclude_activities):
             {"role": "system", "content": "You answer questions about Web services."},
             {"role": "user", "content": prompt1},
         ],
-        temperature=0,
+        temperature=1,
     )
 
     name = response1.choices[0].message.content.strip()
 
     # Second prompt to get the activity description
-    prompt2 = f"Give one sentence description of the activity {name}."
+    prompt2 = f"Provide a one-sentence description of the activity {name}."
 
     response2 = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -117,13 +122,13 @@ def get_chatgpt_activity(exclude_activities):
             {"role": "system", "content": "You answer questions about Web services."},
             {"role": "user", "content": prompt2},
         ],
-        temperature=0,
+        temperature=0.3,
     )
 
     description = response2.choices[0].message.content.strip()
 
     # Third prompt to get the reason why it's worth trying
-    prompt3 = f"Why is the activity {name} worth trying? Explain in one sentence."
+    prompt3 = f"Explain in one sentence why the activity {name} is worth trying."
 
     response3 = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -131,7 +136,7 @@ def get_chatgpt_activity(exclude_activities):
             {"role": "system", "content": "You answer questions about Web services."},
             {"role": "user", "content": prompt3},
         ],
-        temperature=0,
+        temperature=0.3,
     )
 
     why_worth = response3.choices[0].message.content.strip()
@@ -225,3 +230,18 @@ def reset_session():
     return jsonify({"message": "Session reset"})
 
 
+"""
+few notes:
+
+if not videoID(meaning quota is exceeded or any other reason):
+
+
+    try this:
+
+
+        https://www.youtube.com/results?search_query=what+is+{activity_name}
+
+        see if you can actually extract first video from the list here instead of API
+
+
+"""

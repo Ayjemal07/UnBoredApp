@@ -7,16 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentVideoId = ''; // Store the current video ID
     let clickCount = 0;
 
-
-
-
-
-    //note to myself: try removing auto from the playVars
-    //and try this function loadNewVideo():
-    //if player{player.cueVideobyId(videoId)}
-    //check chatgpt for this suggestion from last convo
-
-
     // Function to initialize the YouTube player
     function initializePlayer(videoId) {
         player = new YT.Player('player', {
@@ -175,7 +165,7 @@ window.addEventListener("blur", function() {
     clearTimeout(sessionTimeout);
     sessionTimeout = setTimeout(function() {
         navigator.sendBeacon("/reset_session");
-    }, 3600000); // 1 hour delay after navigating away
+    }, 3600000); 
 });
 
 // Optional: Handle page load
