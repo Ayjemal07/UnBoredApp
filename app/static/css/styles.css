@@ -1,6 +1,17 @@
 body, html {
     height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
 }
 
 *, *::before, *::after {
@@ -9,16 +20,10 @@ body, html {
     box-sizing: inherit;
 }
 
-body {
-    /* padding-top: 100px;  */
-    font-family: Arial, sans-serif;
-}
-
-
 .container {
     /* position: relative; */
     text-align: center;
-    margin-bottom: 350px;
+    margin-bottom: 100px;
     margin-top: 120px;
 }
 
@@ -63,7 +68,7 @@ body {
 
 
 .slider-container {
-    margin-top: 500px;
+    margin-top: 10px;
     position: relative;
     width: 100%; /* Adjust this as needed */
     max-width: 1200px; /* Adjust to your desired max width */
@@ -80,8 +85,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
-
 
 
 .card__subtitle,
@@ -190,74 +193,152 @@ body {
     right: -93px;
 }
 
-
+.activity-container {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
 
 .activity-card {
-    border: 1px solid #ddd; /* Border color for the activity card */
-    border-radius: 8px; /* Rounded corners for the card */
-    padding: 20px; /* Padding inside the card */
-    margin-bottom: 20px; /* Margin between cards */
-    background-color: #f9f9f9; /* Background color for the card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a slight elevation effect */
-
+    padding: 10px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
     /* Ensure text doesn't overflow */
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+
+}
+
+.activity-card:hover {
+    transform: scale(1.02);
 }
 
 .activity-card h2 {
-    font-size: 24px; /* Font size for the activity name */
-    margin-bottom: 10px; /* Bottom margin for the activity name */
-    color: #333; /* Text color for the activity name */
+    font-size: 35px;
+    color: #2d572c; /* Dark green color for the title */
+    background-color: white;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
+    font-family: 'Arial', sans-serif; /* Change the font */
 }
 
 .activity-card p {
-    font-size: 16px; /* Font size for the description and reason */
-    margin-bottom: 10px; /* Bottom margin for paragraphs */
-    line-height: 1.5; /* Line height for better readability */
+    font-size: 24px;
+    color: #5a5a5a; /* Slightly darker grey */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-family: 'Georgia', serif; /* Change the font */
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .activity-card a {
-    display: block; /* Ensure links stack vertically */
-    margin-top: 5px; /* Top margin between links */
-    color: #007bff; /* Link color */
-    text-decoration: none; /* Remove default underline */
+    display: inline-block;
+    font-size: 24px;
+    color: #fff; /* Set text color to white */
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 3px solid #0a130a;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    background-color: #2d572c; /* Set background color to green */
+  }
+
+  @keyframes flash {
+    from { background-color: #2d572c; } /* Start with green background */
+    to { background-color: #57a554; } /* Flash to white */
+  }
+
+  .activity-card a:hover {
+    animation: flash 0.2s ease-in-out forwards; /* Trigger animation on hover */
+  }
+  
+
+/* Flexbox layout for buttons */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    flex-wrap: wrap;
+    gap: 10px; /* Space between buttons */
+    margin-top: 15px; /* Space between content and buttons */
 }
 
-.activity-card a:hover {
-    text-decoration: underline; /* Underline on hover */
+@media (min-width: 768px) {
+    .activity-card {
+        margin-top: 10px;
+        padding: 10px;
+    }
 }
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px; /* Optional max-width to limit container size */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Optional padding for spacing */
+}
+
+
+#player-container, .details-container {
+    flex: 1;
+    max-width: 50%; /* Ensure both containers share the space equally */
+    border: 1px solid transparent;
+    margin: 0 10px; /* Optional margin for spacing */
+}
+
+.details-container {
+    padding-left: 20px; /* Space between the player and details */
+}
+
+#player-container {
+    padding-right: 20px; /* Space between the details and player */
+}
+
 
 
 .navigation {
-    list-style: none; /* Remove default bullet points */
-    margin: 0; /* Remove default margin */
-    padding: 15px 20px; /* Add padding for spacing */
-    display: flex; /* Arrange items horizontally */
-    align-items: center; /* Align items vertically */
+    position: fixed; /* Fix the navigation bar at the top */
+    top: 0;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
     background-color: #aabbaa; /* Optional background color */
-    justify-content: space-between; /* Space out header and nav items */
+    justify-content: space-between;
+    z-index: 1000; /* Ensure it stays on top */
 }
 
 .navigation header {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    margin: 0;
+    padding: 0;
 }
 
 .navigation ul {
-    display: flex; /* Arrange items horizontally */
-    list-style: none; /* Remove default bullet points */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .navigation li {
-    margin-left: 20px; /* Add space between list items */
+    margin-left: 20px;
 }
 
 .navigation a {
-    text-decoration: none; /* Remove underline from links */
-    color: #2d333a; /* Link text color */
-    padding: 5px 10px; /* Padding for links */
+    text-decoration: none;
+    color: #2d333a;
+    padding: 5px 10px;
 }

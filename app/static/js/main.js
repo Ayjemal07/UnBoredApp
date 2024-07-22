@@ -1,83 +1,27 @@
+// Define global variables
+let currentVideoId = ''; // Store the current video ID
+let clickCount = 0;
+
 document.addEventListener('DOMContentLoaded', function () {
     const suggestButton = document.getElementById('suggest-button');
     const nextSuggest = document.getElementById('next-suggest');
     const activityContainer = document.getElementById('activity-container');
-    let player; // Variable to store the YouTube player
-    let playerReady = false; // Flag to indicate if the player is ready
-    let currentVideoId = ''; // Store the current video ID
-    let clickCount = 0;
-
-    // Function to initialize the YouTube player
-    function initializePlayer(videoId) {
-        player = new YT.Player('player', {
-            height: '315',
-            width: '560',
-            videoId: videoId,
-            playerVars: {
-                'controls': 1,
-                'rel': 0,
-                'showinfo': 0,
-                'origin': window.location.origin
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-
-    // Function to load a new video in the player
-    function loadNewVideo(videoId) {
-        if (playerReady) {
-            player.cueVideoById(videoId);
-        } else {
-            console.error('Player is not ready yet.');
-        }
-    }
-
-    // Function to handle player ready event
-    function onPlayerReady(event) {
-        playerReady = true;
-        // Load video when player is ready
-        if (currentVideoId) {
-            loadNewVideo(currentVideoId);
-        }
-    }
-
-    // Function to handle player state changes
-    function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.ENDED) {
-            console.log('Video has ended.');
-            // Optionally handle video end event
-        } else if (event.data == YT.PlayerState.PAUSED) {
-            console.log('Video is paused.');
-            // Optionally handle video pause event
-        } else if (event.data == YT.PlayerState.PLAYING) {
-            console.log('Video is playing.');
-            // Optionally handle video play event
-        }
-    }
-
-    // Load the YouTube IFrame Player API asynchronously
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // Event listener for initial suggestion
     suggestButton.addEventListener('click', async () => {
         clickCount = 0;
         console.log('Suggest button clicked');
         await fetchActivity();
-    }, { passive: true }); // Add passive: true
+    }, { passive: true });
 
     // Event listener for next suggestion
     nextSuggest.addEventListener('click', async () => {
         clickCount += 1;
         console.log('Next suggest button clicked');
         await fetchActivity();
-    }, { passive: true }); // Add passive: true
+    }, { passive: true });
 
+    const upperCaseName = (act_name) => act_name.toUpperCase();
 
     // Function to fetch activity data
     const fetchActivity = async () => {
@@ -87,47 +31,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log('Activity fetched:', data);
 
+            // Extract video ID from YouTube URL
+            const urlParams = new URL(data.youtube).searchParams;
+            currentVideoId = urlParams.get('v');
+
+            const embedUrl = `https://www.youtube-nocookie.com/embed/${currentVideoId}?origin=${window.location.origin}`;
+
             // Clear previous content
             activityContainer.innerHTML = '';
+
+            const upperCasedActivityName = upperCaseName(data.name);
 
             // Display activity details
             const activityCard = document.createElement('div');
             activityCard.className = 'activity-card';
             activityCard.innerHTML = `
-                <h2>${data.name}</h2>
-                <p>${data.description}</p>
-                <p>Why it's worth doing this activity: ${data.why_worth}</p>
-                <div id="player"></div>
-                <a href="${data.youtube}" target="_blank">Watch this activity in action</a><br>
-                <a href="${data.meetup}" target="_blank">Join a Meetup</a><br>
-                <a href="${data.google}" target="_blank">Google this activity near me</a>
+                <div class="flex-container">
+                    <div id="player-container">
+                        <iframe
+                            width="620"
+                            height="450"
+                            src="${embedUrl}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="details-container">
+                        <h2>${upperCasedActivityName}</h2>
+                        <p>${data.description}</p>
+                        <p>Why should you do this activity?</p>
+                        <p>${data.why_worth}</p>
+                        <div class="button-container">
+                            <a href="${data.meetup}" target="_blank">Join ${data.name} Meetup</a><br>
+                            <a href="${data.google}" target="_blank">Google this activity near me</a>
+                            <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch videos of this activity</a><br>
+
+                        </div>
+                    </div>    
+                </div>
             `;
 
             activityContainer.appendChild(activityCard);
 
-            // Extract video ID from YouTube URL
-            const urlParams = new URL(data.youtube).searchParams;
-            currentVideoId = urlParams.get('v');
-
-            if (!currentVideoId) {
-                console.error('Could not extract video ID from URL:', data.youtube);
-                return;
-            }
-
-            // Initialize or load the YouTube player with the new video
-            if (typeof YT !== 'undefined' && YT.loaded) {
-                if (player) {
-                    player.destroy(); // Destroy the existing player before creating a new one
-                    initializePlayer(currentVideoId); // Reinitialize the player with the new video
-                } else {
-                    initializePlayer(currentVideoId);
-                }
-            } else {
-                console.error('YouTube API not yet loaded.');
-            }
-
-
-            // Show the next button
+            // Show the activity container and the next button
+            activityContainer.style.display = 'block';
             nextSuggest.style.display = 'inline-block';
 
             // Hide the suggest button
@@ -136,27 +84,14 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching activity:', error);
         }
     };
-
-
-    // Check if the YouTube IFrame API is loaded, and reinitialize the player if necessary
-    window.onYouTubeIframeAPIReady = function() {
-        if (currentVideoId) {
-            initializePlayer(currentVideoId);
-        }
-    };
-
 });
 
 
-
-
-
-
-//Session Handling logic 
+// Session Handling logic
 let sessionTimeout;
 
-window.addEventListener("beforeunload", function (e) {
-    // Send a request to invalidate the session 10 minutes after tab is closed
+window.addEventListener("beforeunload", function () {
+    // Send a request to invalidate the session when the tab is closed
     navigator.sendBeacon("/reset_session");
 });
 
@@ -172,5 +107,16 @@ window.addEventListener("blur", function() {
 window.addEventListener("load", function() {
     // Reset any existing session timeouts on load
     clearTimeout(sessionTimeout);
-
 });
+
+// Example of optimized setTimeout usage
+function performTasks() {
+    setTimeout(() => {
+        // Perform part of the task
+        taskPart1();
+        setTimeout(() => {
+            // Continue with more tasks
+            taskPart2();
+        }, 0);
+    }, 0);
+}

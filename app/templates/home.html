@@ -3,7 +3,7 @@
 
 {% block content %} 
 <div class="container mt-5">
-    <h1>Feeling Bored? Try this: </h1>
+    <h1>Looking for something to do? Try this: </h1>
     <button id="suggest-button" class="suggestion-button" >Suggest an Activity</button>
     <div id="activity-container" class="activity-container">
         <!-- Activity details will be dynamically inserted here -->
@@ -117,4 +117,7 @@
     </div>
 </div>    
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}

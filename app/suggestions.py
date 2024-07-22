@@ -90,15 +90,17 @@ def get_chatgpt_activity(exclude_activities):
     exclude_list = ', '.join(exclude_activities) if exclude_activities else ''
 
     if exclude_activities:
-        prompt1 = f"""You are helping someone find a fun and engaging activity to do. 
+        prompt1 = f"""Think before you reply. You are helping someone find a fun and engaging
+        activity/hobby. Be creative!
         Suggest one activity that is enjoyable and worth trying, but exclude activies 
         from the the following list:
-        {exclude_list}.
+        {exclude_list}. 
         Give me just the name of the activity only."""
 
     else:
         prompt1="""You are helping someone find a fun and engaging activity to do. 
-        Suggest one activity that is enjoyable and worth trying.
+        Suggest one activity that is enjoyable and worth trying. Think before you reply
+        and be creative! 
         Give me just the name of the activity only."""
 
         
@@ -114,7 +116,7 @@ def get_chatgpt_activity(exclude_activities):
     name = response1.choices[0].message.content.strip()
 
     # Second prompt to get the activity description
-    prompt2 = f"Provide a one-sentence description of the activity {name}."
+    prompt2 = f"Provide a one-sentence description of what is {name}."
 
     response2 = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -128,7 +130,7 @@ def get_chatgpt_activity(exclude_activities):
     description = response2.choices[0].message.content.strip()
 
     # Third prompt to get the reason why it's worth trying
-    prompt3 = f"Explain in one sentence why the activity {name} is worth trying."
+    prompt3 = f"Explain in one sentence why {name} is worth trying."
 
     response3 = client.chat.completions.create(
         model="gpt-4-1106-preview",
