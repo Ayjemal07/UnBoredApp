@@ -21,10 +21,10 @@ body {
 }
 
 .container {
-    /* position: relative; */
     text-align: center;
-    margin-bottom: 100px;
-    margin-top: 120px;
+    margin-top: 172px;
+    padding-top:20px;
+    margin-bottom: 50px;
 }
 
 .suggestion-button, .next-suggest {
@@ -195,16 +195,17 @@ body {
 
 .activity-container {
     margin-top: 10px;
-    padding: 10px;
+    padding: 20px;
     background-color: #fff;
     border: 1px solid #dee2e6;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: none;
+    overflow: auto; /* Add this to manage content overflow */
 }
 
 .activity-card {
-    padding: 10px;
+    padding: 20px;
     background: white;
     border: 1px solid #dee2e6;
     border-radius: 10px;
@@ -220,12 +221,15 @@ body {
 }
 
 .activity-card h2 {
-    font-size: 35px;
-    color: #2d572c; /* Dark green color for the title */
-    background-color: white;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
-    font-family: 'Arial', sans-serif; /* Change the font */
+    font-size: 40px; /* Increase font size */
+    color: #1a5319; /* Dark green color for the title */
+    background-color: hwb(0 96% 4%); /* Light background color for contrast */
+    padding: 10px; /* Add padding around the text */
+    border-radius: 5px; /* Round the corners of the background */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    font-weight: bold; /* Make the text bold */
+    margin-bottom: 20px; /* Space below the heading */
+    letter-spacing: 1px; /* Add some space between letters */
 }
 
 .activity-card p {
@@ -244,22 +248,22 @@ body {
     color: #fff; /* Set text color to white */
     text-decoration: none;
     padding: 10px 15px;
-    border: 3px solid #0a130a;
+    border: 3px solid #495f49;
     border-radius: 10px;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-    background-color: #2d572c; /* Set background color to green */
+    box-shadow: 0 2px 4px rgba(70, 66, 66, 0.2); /* Add a shadow for depth */
+    background-color: #57a554; /* Set background color to green */
   }
 
   @keyframes flash {
-    from { background-color: #2d572c; } /* Start with green background */
-    to { background-color: #57a554; } /* Flash to white */
+    from { background-color: #57a554; } /* Start with green background */
+    to { background-color: #2d572c; } /* Flash to white */
   }
 
   .activity-card a:hover {
     animation: flash 0.2s ease-in-out forwards; /* Trigger animation on hover */
   }
-  
+
 
 /* Flexbox layout for buttons */
 .button-container {
@@ -280,13 +284,11 @@ body {
 .flex-container {
     display: flex;
     flex-direction: row;
-    align-items: center; /* Center items vertically */
+    align-items: flex-start; /* Center items vertically */
     justify-content: center; /* Center items horizontally */
     box-sizing: border-box;
     width: 100%;
     max-width: 1200px; /* Optional max-width to limit container size */
-    margin: auto; /* Center the container */
-    padding: 20px; /* Optional padding for spacing */
 }
 
 
@@ -302,9 +304,37 @@ body {
 }
 
 #player-container {
-    padding-right: 20px; /* Space between the details and player */
+    flex: 1;
+    max-width: 50%;
+    margin-right: 54px;
 }
 
+
+h1 {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 45px;
+    color: #1b3b1d;
+}
+
+.spinner {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Ensure it is on top of other content */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 .navigation {

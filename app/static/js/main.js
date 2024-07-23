@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const suggestButton = document.getElementById('suggest-button');
     const nextSuggest = document.getElementById('next-suggest');
     const activityContainer = document.getElementById('activity-container');
+    const spinner = document.getElementById('spinner');
+
 
     // Event listener for initial suggestion
     suggestButton.addEventListener('click', async () => {
@@ -26,6 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to fetch activity data
     const fetchActivity = async () => {
         try {
+            console.log('Showing spinner');
+            // Show spinner
+            spinner.style.display = 'block';
+
             const response = await fetch(`/suggest_activity?clickCount=${clickCount}`);
             const data = await response.json();
 
@@ -50,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div id="player-container">
                         <iframe
                             width="620"
-                            height="450"
+                            height="550"
                             src="${embedUrl}"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -60,19 +66,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="details-container">
                         <h2>${upperCasedActivityName}</h2>
                         <p>${data.description}</p>
-                        <p>Why should you do this activity?</p>
-                        <p>${data.why_worth}</p>
+                        <p>Why should you do this activity?<br><span>${data.why_worth}</span></p>
                         <div class="button-container">
                             <a href="${data.meetup}" target="_blank">Join ${data.name} Meetup</a><br>
-                            <a href="${data.google}" target="_blank">Google this activity near me</a>
-                            <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch videos of this activity</a><br>
-
+                            <a href="${data.google}" target="_blank">Google this activity near you</a>
+                            <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch more videos of this activity</a><br>
                         </div>
                     </div>    
                 </div>
             `;
 
             activityContainer.appendChild(activityCard);
+
+            // Delay hiding the spinner for 500 milliseconds
+            setTimeout(() => {
+                console.log('Hiding spinner');
+                spinner.style.display = 'none';
+            }, 3000);
+
 
             // Show the activity container and the next button
             activityContainer.style.display = 'block';
@@ -82,6 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
             suggestButton.style.display = 'none';
         } catch (error) {
             console.error('Error fetching activity:', error);
+            spinner.style.display = 'none';
+
         }
     };
 });

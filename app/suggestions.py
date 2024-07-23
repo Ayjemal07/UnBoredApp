@@ -116,7 +116,7 @@ def get_chatgpt_activity(exclude_activities):
     name = response1.choices[0].message.content.strip()
 
     # Second prompt to get the activity description
-    prompt2 = f"Provide a one-sentence description of what is {name}."
+    prompt2 = f"Provide a one-sentence description of what is {name}. Character limit is less than 140"
 
     response2 = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -130,7 +130,7 @@ def get_chatgpt_activity(exclude_activities):
     description = response2.choices[0].message.content.strip()
 
     # Third prompt to get the reason why it's worth trying
-    prompt3 = f"Explain in one sentence why {name} is worth trying."
+    prompt3 = f"Explain in one sentence why {name} is worth trying. Make sure character limit is less than 140"
 
     response3 = client.chat.completions.create(
         model="gpt-4-1106-preview",
