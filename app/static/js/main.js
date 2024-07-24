@@ -32,13 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             // Show spinner
             spinner.style.display = 'block';
+            nextSuggest.disabled = true; // Disable the next suggestion button
+
 
             const response = await fetch(`/suggest_activity?clickCount=${clickCount}`);
             const data = await response.json();
 
             console.log('Activity fetched:', data);
 
-            console.log(data.youtube)
             // Extract video ID from YouTube URL
             const urlParams = new URL(data.youtube).searchParams;
             currentVideoId = urlParams.get('v');
@@ -57,8 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="flex-container">
                     <div id="player-container">
                         <iframe
-                            width="620"
-                            height="550"
                             src="${embedUrl}"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -84,13 +83,15 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show the activity container and the next button
             activityContainer.style.display = 'block';
             nextSuggest.style.display = 'inline-block';
+            nextSuggest.disabled = false; // Re-enable the next suggestion button
+
 
             // Hide the suggest button
             suggestButton.style.display = 'none';
         } catch (error) {
             console.error('Error fetching activity:', error);
             spinner.style.display = 'none';
-
+            nextSuggest.disabled = false; // Re-enable the next suggestion button on error
         }
     };
 });
@@ -176,6 +177,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+//Navbar Hiding when Scrolling:
+
+let lastScrollTop = 0;
+
+document.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navigation');
+    const currentScroll = window.scrollY || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+        // Scrolling down
+        navbar.classList.add('hidden');
+    } else {
+        // Scrolling up
+        navbar.classList.remove('hidden');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+});
 // Session Handling logic
 let sessionTimeout;
 

@@ -1,5 +1,5 @@
+/* General styles */
 body, html {
-    height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -20,17 +20,20 @@ body {
     box-sizing: inherit;
 }
 
+/* Container */
 .container {
     text-align: center;
-    margin-top: 172px;
-    padding-top:20px;
+    margin-top: 52px;
+    padding-top: 10px;
     margin-bottom: 50px;
 }
 
+/* Buttons */
 .suggestion-button, .next-suggest {
     display: inline-block; /* Ensure both buttons are inline-block */
-    padding: 40px 60px; /* Increase padding for a bigger button */
-    font-size: 30px; /* Increase font size for larger text */
+    width: 300px;
+    padding: 25px; /* Increase padding for a bigger button */
+    font-size: 25px; /* Increase font size for larger text */
     font-weight: bold;
     color: white;
     background: linear-gradient(90deg, #4caf50, #7bdcb5); /* Greenish bright gradient */
@@ -38,8 +41,7 @@ body {
     border-radius: 10px; /* Increase border-radius for a more rounded button */
     cursor: pointer;
     transition: background 0.3s ease; /* Smooth transition for hover effect */
-    margin: 20px 0; /* Add margin for spacing */
-    margin-top: 50px;
+    margin-top: 28px;
 }
 
 @keyframes flash {
@@ -60,13 +62,17 @@ body {
     background: linear-gradient(90deg, #45a049, #76dc78); /* Different gradient on hover */
 }
 
-/* Ensure next-suggest is hidden initially */
 .next-suggest {
     display: none; /* Initially hidden */
-    margin-top: 20px; /* Space between cards and button */
 }
 
-
+/* Disabled button styling */
+button:disabled {
+    background: gray; /* Gray background */
+    color: darkgray; /* Darker text color */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+    opacity: 0.6; /* Slightly faded appearance */
+}
 
 /* Slider Styling */
 .slider-container {
@@ -182,30 +188,26 @@ body {
     right: -2px; /* Move right button further outside */
 }
 
-
-
-/* Activity suggestion CSS*/
+/* Activity suggestion CSS */
 .activity-container {
     margin-top: 10px;
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #dee2e6;
     border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: none;
     overflow: auto; /* Add this to manage content overflow */
 }
 
 .activity-card {
-    padding: 20px;
+    padding: 10px; /* Reduce padding */
     background: white;
     border: 1px solid #dee2e6;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Slightly reduce border-radius */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); /* Adjust shadow */
     transition: transform 0.2s;
-    /* Ensure text doesn't overflow */
-    overflow: hidden;
-
+    overflow: hidden; /* Ensure text doesn't overflow */
+    max-width: 80%; /* Adjust the width to fit better */
+    margin: 0 auto; /* Center the card */
+    max-height: 400px; /* Limit the card's height */
 }
 
 .activity-card:hover {
@@ -213,64 +215,55 @@ body {
 }
 
 .activity-card h2 {
-    font-size: 40px; /* Increase font size */
+    font-size: 25px; /* Reduce font size */
     color: #1a5319; /* Dark green color for the title */
     background-color: hwb(0 96% 4%); /* Light background color for contrast */
-    padding: 10px; /* Add padding around the text */
+    padding: 5px; /* Reduce padding around text */
     border-radius: 5px; /* Round the corners of the background */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
     font-weight: bold; /* Make the text bold */
-    margin-bottom: 20px; /* Space below the heading */
-    letter-spacing: 1px; /* Add some space between letters */
+    margin-bottom: 15px; /* Reduce space below heading */
+    letter-spacing: 0.5px; /* Adjust letter-spacing */
 }
 
 .activity-card p {
-    font-size: 24px;
+    font-size: 18px; /* Reduce font size */
     color: #5a5a5a; /* Slightly darker grey */
-    line-height: 1.6;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduce margin-bottom */
     font-family: 'Georgia', serif; /* Change the font */
-    padding: 10px;
+    padding: 5px; /* Reduce padding */
     border-radius: 5px;
 }
 
 .activity-card a {
     display: inline-block;
-    font-size: 24px;
+    font-size: 18px; /* Reduce font size */
     color: #fff; /* Set text color to white */
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 5px 10px; /* Adjust padding */
     border: 3px solid #495f49;
-    border-radius: 10px;
+    border-radius: 8px; /* Adjust border-radius */
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
     box-shadow: 0 2px 4px rgba(70, 66, 66, 0.2); /* Add a shadow for depth */
     background-color: #57a554; /* Set background color to green */
-  }
+}
 
-  @keyframes flash {
+@keyframes flash {
     from { background-color: #57a554; } /* Start with green background */
     to { background-color: #2d572c; } /* Flash to white */
-  }
+}
 
-  .activity-card a:hover {
+.activity-card a:hover {
     animation: flash 0.2s ease-in-out forwards; /* Trigger animation on hover */
-  }
-
+}
 
 /* Flexbox layout for buttons */
 .button-container {
     display: flex;
     justify-content: center; /* Center horizontally */
     flex-wrap: wrap;
-    gap: 10px; /* Space between buttons */
+    gap: 5px; /* Space between buttons */
     margin-top: 15px; /* Space between content and buttons */
-}
-
-@media (min-width: 768px) {
-    .activity-card {
-        margin-top: 10px;
-        padding: 10px;
-    }
 }
 
 .flex-container {
@@ -278,37 +271,46 @@ body {
     flex-direction: row;
     align-items: flex-start; /* Center items vertically */
     justify-content: center; /* Center items horizontally */
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 1200px; /* Optional max-width to limit container size */
+    flex-wrap: wrap; /* Ensure items wrap on smaller screens */
+    gap: 10px; /* Adjust gap as needed */
 }
 
-
-#player-container, .details-container {
+/* Player container */
+#player-container {
     flex: 1;
-    max-width: 50%; /* Ensure both containers share the space equally */
-    border: 1px solid transparent;
-    margin: 0 10px; /* Optional margin for spacing */
+    max-width: 100%;
+    margin-right: 20px;
+    overflow: hidden;
+    position: relative;
+    padding-top: 56.25%; /* Aspect ratio 16:9 */
 }
 
+#player-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Details container */
 .details-container {
+    flex: 1;
+    max-width: 100%;
     padding-left: 20px; /* Space between the player and details */
 }
 
-#player-container {
-    flex: 1;
-    max-width: 50%;
-    margin-right: 54px;
-}
-
-
+/* Headings */
 h1 {
-    margin: 20px 0;
     text-align: center;
-    font-size: 45px;
-    color: #1b3b1d;
+    font-size: 35px;
+    color: #1b471e;
+    margin-top:10px;
+    margin-bottom: -14px;
 }
 
+/* Spinner */
 .spinner {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #315531; /* Blue */
@@ -328,7 +330,7 @@ h1 {
     100% { transform: rotate(360deg); }
 }
 
-
+/* Navigation */
 .navigation {
     position: fixed; /* Fix the navigation bar at the top */
     top: 0;
@@ -342,6 +344,12 @@ h1 {
     justify-content: space-between;
     z-index: 1000; /* Ensure it stays on top */
 }
+
+
+.navigation.hidden {
+    transform: translateY(-100%); /* Move the navbar out of view */
+}
+
 
 .navigation header {
     margin: 0;
@@ -363,4 +371,65 @@ h1 {
     text-decoration: none;
     color: #2d333a;
     padding: 5px 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .suggestion-button, .next-suggest {
+        padding: 20px 30px; /* Adjust padding for smaller screens */
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .slider-container {
+        flex-direction: column; /* Stack slider elements vertically */
+    }
+
+    .card {
+        width: 90%; /* Adjust card width for smaller screens */
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .activity-card h2 {
+        font-size: 24px; /* Adjust font size for smaller screens */
+    }
+
+    .activity-card p, .activity-card a {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+
+    .nav-button {
+        font-size: 18px; /* Adjust font size for smaller screens */
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    .flex-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center; /* Center items */
+    }
+
+    #player-container {
+        max-width: 90%; /* Adjust max-width for smaller screens */
+        margin-right: 0; /* Remove margin for smaller screens */
+        padding-top: 56.25%; /* Maintain aspect ratio */
+    }
+
+    .details-container {
+        max-width: 90%; /* Adjust max-width for smaller screens */
+        padding-left: 0; /* Remove padding for smaller screens */
+        margin-top: 20px; /* Add margin for spacing */
+    }
+
+    .navigation {
+        flex-direction: column; /* Stack navigation elements vertically */
+        align-items: center; /* Center navigation elements */
+    }
+
+    .navigation ul {
+        flex-direction: column; /* Stack navigation links vertically */
+        align-items: center; /* Center navigation links */
+    }
+
+    .navigation li {
+        margin: 10px 0; /* Adjust margin for navigation links */
+    }
 }
