@@ -12,9 +12,6 @@ def get_activities():
     serialized_activities = []
     for activity in activities:
         serialized_activity = activity.serialize()
-        serialized_activity['youtube_link'] = get_youtube_link(activity.name)
-        serialized_activity['google_link'] = get_google_link(activity.name)
-        serialized_activity['meetup_link'] = get_meetup_link(activity.name)
         serialized_activities.append(serialized_activity)
     return jsonify(serialized_activities)
 
@@ -22,9 +19,6 @@ def get_activities():
 def get_activity(id):
     activity = Activity.query.get_or_404(id)
     serialized_activity = activity.serialize()
-    serialized_activity['youtube_link'] = get_youtube_link(activity.name)
-    serialized_activity['google_link'] = get_google_link(activity.name)
-    serialized_activity['meetup_link'] = get_meetup_link(activity.name)
     return jsonify(serialized_activity)
 
 @crud.route('/activities', methods=['POST'])

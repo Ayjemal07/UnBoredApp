@@ -90,17 +90,17 @@ def get_chatgpt_activity(exclude_activities):
     exclude_list = ', '.join(exclude_activities) if exclude_activities else ''
 
     if exclude_activities:
-        prompt1 = f"""Think before you reply. You are helping someone find a fun and engaging
-        activity/hobby. Be creative!
-        Suggest one activity that is enjoyable and worth trying, but exclude activies 
-        from the the following list:
+        prompt1 = f"""Think before you reply. Be creative!
+        You are helping someone find a fun and engaging activity/hobby. 
+        Suggest one activity that is enjoyable and worth trying, but 
+        exclude activies from the the following list:
         {exclude_list}. 
         Give me just the name of the activity only."""
 
     else:
-        prompt1="""You are helping someone find a fun and engaging activity to do. 
-        Suggest one activity that is enjoyable and worth trying. Think before you reply
-        and be creative! 
+        prompt1="""Think before you reply and be creative!
+        You are helping someone find a fun and engaging activity to do. 
+        Suggest one activity that is enjoyable and worth trying.  
         Give me just the name of the activity only."""
 
         
@@ -179,7 +179,7 @@ def suggest_activity():
     seen_activities = session['seen_activities']
 
     cherry_pick_activities = Activity.query.filter_by(cherry_picked=True).all()
-    cherry_pick_activities = [activity for activity in cherry_pick_activities if activity.id not in seen_activities]
+    cherry_pick_activities = [activity for activity in cherry_pick_activities if activity.name not in seen_activities]
 
     selected_activity = None
 
@@ -200,11 +200,6 @@ def suggest_activity():
 
 
     if isinstance(selected_activity, Activity):
-        # Populate YouTube, Google, and Meetup links
-        selected_activity.youtube_link = get_youtube_link(selected_activity.name)
-        selected_activity.google_link = get_google_link(selected_activity.name)
-        selected_activity.meetup_link = get_meetup_link(selected_activity.name)
-
         # Serialize the activity and return as JSON response
         serialized_activity = {
             "id": selected_activity.id,
@@ -216,8 +211,6 @@ def suggest_activity():
             "meetup": selected_activity.meetup_link,
             "cherry_picked": selected_activity.cherry_picked
         }
-
-
         return jsonify(serialized_activity)
     
     else:
@@ -230,20 +223,3 @@ def reset_session():
     session.pop('seen_activities', None)
     print("was reset")
     return jsonify({"message": "Session reset"})
-
-
-"""
-few notes:
-
-if not videoID(meaning quota is exceeded or any other reason):
-
-
-    try this:
-
-
-        https://www.youtube.com/results?search_query=what+is+{activity_name}
-
-        see if you can actually extract first video from the list here instead of API
-
-
-"""

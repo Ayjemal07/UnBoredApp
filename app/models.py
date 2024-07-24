@@ -72,9 +72,9 @@ class Activity(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     why_worth = db.Column(db.String(500), nullable=False)
-    youtube_link = db.Column(db.String(500), nullable=True)
-    meetup_link = db.Column(db.String(500), nullable=True)
-    google_link = db.Column(db.String(500), nullable=True)
+    youtube_link = db.Column(db.String(500), nullable=False)
+    meetup_link = db.Column(db.String(500), nullable=False)
+    google_link = db.Column(db.String(500), nullable=False)
     cherry_picked = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -88,5 +88,8 @@ class Activity(db.Model):
             'name': self.name,
             'description': self.description,
             'why_worth': self.why_worth,
+            'google_link':self.google_link,
+            'youtube_link':self.youtube_link,
+            'meetup_link':self.meetup_link,
             'cherry_picked': self.cherry_picked
         }

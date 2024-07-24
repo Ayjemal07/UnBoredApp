@@ -67,8 +67,9 @@ body {
 }
 
 
+
+/* Slider Styling */
 .slider-container {
-    margin-top: 10px;
     position: relative;
     width: 100%; /* Adjust this as needed */
     max-width: 1200px; /* Adjust to your desired max width */
@@ -76,40 +77,24 @@ body {
     background-color: rgb(181, 216, 181);
     display: flex;
     align-items: center;
+    overflow: hidden; /* Ensures no content spills out */
 }
 
-
 .slider {
-    flex: 1;
+    position: relative; /* Make sure the slider is positioned relative for button positioning */
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    overflow: hidden; /* Hide overflow for the slider */
 }
-
-
-.card__subtitle,
-.card__title {
-    display: block; /* Display subtitle and title as block elements */
-}
-
-.slider__title {
-    font-size: 20px;
-    margin-bottom: 16px; /* Add space below title */
-}
-
-.slider__subtitle {
-    font-size: 16px;
-    margin-bottom: 8px; /* Add space below subtitle */
-}
-
-
-
 
 .slider__list {
     display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
+    transition: transform 0.5s ease; /* Smooth transition for sliding */
 }
 
 .slider__item {
@@ -124,13 +109,12 @@ body {
     border: 4px solid #7bbd00;
     border-radius: 12px;
     background-color: white; /* Background color of the card */
-    color:black;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Distribute space evenly between header, content, and footer */
     box-sizing: border-box;
 }
-
 
 .card__thumbnail {
     width: 100%;
@@ -138,7 +122,6 @@ body {
     overflow: hidden; /* Hide overflow */
     border-radius: 8px;
 }
-
 
 .card__thumbnail img {
     width: 100%;
@@ -157,10 +140,10 @@ body {
 
 .card__subtitle {
     font-size: 18px;
-    font-weight:600;
+    font-weight: 600;
     margin: 0;
     word-wrap: break-word;
-    color:rgb(20, 71, 20);
+    color: rgb(20, 71, 20);
 }
 
 .button {
@@ -183,16 +166,25 @@ body {
     padding: 10px;
     cursor: pointer;
     z-index: 1;
+    font-size: 24px; /* Larger font for better visibility */
+    transition: background-color 0.3s ease; /* Smooth transition for button hover effect */
+}
+
+.nav-button:hover {
+    background-color: darkgray; /* Button hover effect */
 }
 
 .prev-button {
-    left: -13px;
+    left: -2px; /* Move left button further outside */
 }
 
 .next-button {
-    right: -93px;
+    right: -2px; /* Move right button further outside */
 }
 
+
+
+/* Activity suggestion CSS*/
 .activity-container {
     margin-top: 10px;
     padding: 20px;
@@ -319,7 +311,7 @@ h1 {
 
 .spinner {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border-top: 16px solid #315531; /* Blue */
     border-radius: 50%;
     width: 100px; /* Adjust size as needed */
     height: 100px; /* Adjust size as needed */

@@ -2,11 +2,13 @@
 let currentVideoId = ''; // Store the current video ID
 let clickCount = 0;
 
+
+//Activity Suggestion Generation Logic
 document.addEventListener('DOMContentLoaded', function () {
     const suggestButton = document.getElementById('suggest-button');
     const nextSuggest = document.getElementById('next-suggest');
     const activityContainer = document.getElementById('activity-container');
-    const spinner = document.getElementById('spinner');
+    let spinner = document.getElementById('spinner');
 
 
     // Event listener for initial suggestion
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log('Activity fetched:', data);
 
+            console.log(data.youtube)
             // Extract video ID from YouTube URL
             const urlParams = new URL(data.youtube).searchParams;
             currentVideoId = urlParams.get('v');
@@ -78,13 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             activityContainer.appendChild(activityCard);
 
-            // Delay hiding the spinner for 500 milliseconds
-            setTimeout(() => {
-                console.log('Hiding spinner');
-                spinner.style.display = 'none';
-            }, 3000);
-
-
+            // Delay hiding the spinner 
+            console.log('Hiding spinner');
+            spinner.style.display = 'none';
             // Show the activity container and the next button
             activityContainer.style.display = 'block';
             nextSuggest.style.display = 'inline-block';
@@ -98,6 +97,80 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 });
+
+
+//Slider List Logic
+
+document.addEventListener('DOMContentLoaded', function () {
+    const sliderList = document.getElementById('slider-list');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    let currentPage = 1;
+    const perPage = 6; // Number of items per page
+
+    // Function to fetch and display cherry-picked activities
+    const fetchCherryPickedActivities = async (page) => {
+        try {
+            const response = await fetch(`/activities?page=${page}&per_page=${perPage}`);
+            const data = await response.json();
+
+            if (data.length === 0) {
+                console.log('No more activities to load.');
+                nextButton.disabled = true; // Disable next button if no more activities
+                return; // No more activities to load
+            }
+
+            data.forEach(activity => {
+                const listItem = document.createElement('li');
+                listItem.className = 'slider__item';
+                listItem.innerHTML = `
+                    <article class="card">
+                        <div class="card__thumbnail">
+                            <img alt="${activity.name}" src="./static/images/${activity.name}.jpg">
+                        </div>
+                        <header>
+                            <div class="card__heading">
+                                <p role="heading" aria-level="3">
+                                    <span class="card__subtitle">${activity.name.toUpperCase()}</span>
+                                    <span class="card__title">${activity.description}</span>
+                                </p>
+                            </div>
+                        </header>
+                        <footer class="card__footer">
+                            <a class="button" href="${activity.google_link}" aria-label="ENGAGE NOW">ENGAGE NOW</a>
+                        </footer>
+                    </article>
+                `;
+                sliderList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error fetching cherry-picked activities:', error);
+        }
+    };
+
+    // Function to handle next slide
+    const loadNextSlide = () => {
+        currentPage++;
+        fetchCherryPickedActivities(currentPage);
+    };
+
+    // Function to handle previous slide
+    const loadPreviousSlide = () => {
+        if (currentPage > 1) {
+            currentPage--;
+            sliderList.innerHTML = ''; // Clear previous content
+            fetchCherryPickedActivities(currentPage);
+        }
+    };
+
+    // Load initial set of activities
+    fetchCherryPickedActivities(currentPage);
+
+    // Event listeners for navigation buttons
+    nextButton.addEventListener('click', loadNextSlide);
+    prevButton.addEventListener('click', loadPreviousSlide);
+});
+
 
 
 // Session Handling logic

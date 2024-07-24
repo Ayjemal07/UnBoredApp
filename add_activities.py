@@ -7,181 +7,322 @@ app.app_context().push()
 
 # 35 Cherry-picked activities to add
 cherry_picked_activities = [
-    {
-        "name": "Pickleball",
-        "description": "A fast-paced paddle sport combining tennis, badminton, and ping-pong, played on a smaller court with a perforated plastic ball.",
-        "why_worth": "It's great for cardiovascular health and social interaction."
-    },
-    {
-        "name": "Puzzle Swap",
-        "description": "Exchange puzzles with friends and family to enjoy new challenges and foster community connections.",
-        "why_worth": "This activity stimulates the brain and encourages bonding through shared interests."
-    },
-    {
-        "name": "Tai Chi",
-        "description": "A gentle martial art focused on slow, flowing movements that improve balance, flexibility, and mental tranquility.",
-        "why_worth": "Practicing Tai Chi can reduce stress and enhance overall well-being."
-    },
-    {
-        "name": "Murder Mystery Night",
-        "description": "An interactive game where participants solve a fictional crime, providing entertainment and stimulating problem-solving skills.",
-        "why_worth": "It encourages teamwork and creativity."
-    },
-    {
-        "name": "Stargazing",
-        "description": "Observing stars and celestial objects, offering relaxation and a sense of wonder about the universe.",
-        "why_worth": "This activity can be both educational and calming, promoting a connection to nature."
-    },
-    {
-        "name": "Potluck Dinner",
-        "description": "A communal meal where everyone brings a dish, fostering social interaction and culinary creativity.",
-        "why_worth": "Sharing food brings people together and introduces diverse cuisines."
-    },
-    {
-        "name": "Board Game Night",
-        "description": "Playing a variety of board games with friends or family, encouraging strategic thinking and fun.",
-        "why_worth": "It strengthens relationships and improves cognitive functions."
-    },
-    {
-        "name": "Hiking",
-        "description": "Walking in nature, providing physical exercise, fresh air, and scenic beauty.",
-        "why_worth": "Hiking boosts mental health and offers a break from the daily routine."
-    },
-    {
-        "name": "Karaoke Night",
-        "description": "Singing favorite songs, boosting confidence and providing entertainment.",
-        "why_worth": "It's a fun way to relieve stress and connect with others through music."
-    },
-    {
-        "name": "Dance Class",
-        "description": "Learning new dance styles, offering physical exercise and improving coordination.",
-        "why_worth": "Dancing is a joyful way to stay fit and meet new people."
-    },
-    {
-        "name": "Book Club",
-        "description": "Reading and discussing books, expanding knowledge, and fostering community.",
-        "why_worth": "It encourages critical thinking and introduces diverse perspectives."
-    },
-    {
-        "name": "Trivia Night",
-        "description": "Competing in trivia games, challenging knowledge, and enjoying friendly competition.",
-        "why_worth": "This activity sharpens the mind and is entertaining for all ages."
-    },
-    {
-        "name": "Yoga Session",
-        "description": "Practicing yoga, which enhances flexibility, strength, and mental clarity.",
-        "why_worth": "Yoga reduces stress and improves overall physical and mental health."
-    },
-    {
-        "name": "Beach Day",
-        "description": "Spending a day at the beach, enjoying activities like swimming, sunbathing, and playing beach games.",
-        "why_worth": "It's a great way to relax, have fun, and soak up some Vitamin D."
-    },
-    {
-        "name": "Pottery Class",
-        "description": "Learning to create pottery pieces, enhancing creativity, and providing a sense of accomplishment.",
-        "why_worth": "Working with clay can be therapeutic and helps develop fine motor skills."
-    },
-    {
-        "name": "Wine Tasting",
-        "description": "Sampling a variety of wines, learning about different flavors and origins.",
-        "why_worth": "It's an enjoyable way to refine your palate and socialize with others."
-    },
-    {
-        "name": "Zip Lining",
-        "description": "Soaring through the air on a zip line, offering an exhilarating adventure and stunning views.",
-        "why_worth": "It's a thrilling way to overcome fears and enjoy nature from a different perspective."
-    },
-    {
-        "name": "Camping",
-        "description": "Spending a night or more in the wilderness, engaging in activities like hiking, fishing, and campfires.",
-        "why_worth": "Camping reconnects you with nature and offers a break from technology and daily stress."
-    },
-    {
-        "name": "Archery",
-        "description": "Practicing shooting arrows at a target, improving focus and hand-eye coordination.",
-        "why_worth": "Archery is both a mental and physical challenge, enhancing concentration and discipline."
-    },
-    {
-        "name": "Salsa Dancing",
-        "description": "Learning the energetic and rhythmic moves of salsa dancing.",
-        "why_worth": "It's a fun way to exercise, improve coordination, and meet new people."
-    },
-    {
-        "name": "Rock Climbing",
-        "description": "Climbing indoor or outdoor rock walls, building strength and overcoming challenges.",
-        "why_worth": "Rock climbing improves physical fitness and boosts confidence."
-    },
-    {
-        "name": "Stand-Up Paddleboarding",
-        "description": "Balancing on a paddleboard while navigating the water, providing a full-body workout.",
-        "why_worth": "Paddleboarding enhances core strength and offers a peaceful water experience."
-    },
-    {
-        "name": "Horseback Riding",
-        "description": "Riding horses, improving balance, coordination, and a connection with animals.",
-        "why_worth": "Horseback riding is both relaxing and invigorating, offering a unique way to enjoy the outdoors."
-    },
-    {
-        "name": "Art Gallery Tour",
-        "description": "Visiting local art galleries to appreciate different forms of art and culture.",
-        "why_worth": "It's an enriching experience that fosters creativity and cultural appreciation."
-    },
-    {
-        "name": "Meditation",
-        "description": "Spending time meditating to practice mindfulness and relaxation.",
-        "why_worth": "It helps reduce stress and enhances mental clarity and emotional well-being."
-    },
-    {
-        "name": "Cooking a Themed Dinner",
-        "description": "Preparing a dinner based on a specific theme or cuisine.",
-        "why_worth": "It's a creative and educational way to explore new cultures and flavors."
-    },
-    {
-        "name": "Biking Adventure",
-        "description": "Going on a biking trail, enjoying the scenery, and getting a good workout.",
-        "why_worth": "Biking is a fun and eco-friendly way to explore new areas and stay active."
-    },
-    {
-        "name": "Film Festival Night",
-        "description": "Watching a series of movies from a specific genre or director, often with themed snacks.",
-        "why_worth": "It’s an entertaining way to appreciate cinema and discuss different films."
-    },
-    {
-        "name": "Paddle Boating",
-        "description": "Navigating a small boat on a calm lake or river, providing relaxation and a mild workout.",
-        "why_worth": "Paddle boating is a serene way to enjoy nature and spend quality time with friends or family."
-    },
-    {
-        "name": "Mini Golf",
-        "description": "Playing a round of mini golf on a themed course, combining fun and mild physical activity.",
-        "why_worth": "It’s a lighthearted way to enjoy outdoor recreation with others."
-    },
-    {
-        "name": "Historical Site Visit",
-        "description": "Touring historical sites or museums to learn about local history and culture.",
-        "why_worth": "It’s an educational activity that enriches knowledge and perspective."
-    },
-    {
-        "name": "Kayaking",
-        "description": "Paddling through rivers, lakes, or coastal waters, offering adventure and a full-body workout.",
-        "why_worth": "Kayaking connects you with nature and improves physical fitness."
-    },
-    {
-        "name": "Ziplining",
-        "description": "Gliding along cables through treetop canopies, offering adrenaline and stunning views.",
-        "why_worth": "Ziplining is exhilarating and a great way to experience nature."
-    },
-    {
-        "name": "Botanical Garden Tour",
-        "description": "Visiting a botanical garden to appreciate diverse plant species and beautiful landscapes.",
-        "why_worth": "This activity is relaxing, educational, and visually pleasing."
-    },
-    {
-        "name": "Ice Skating",
-        "description": "Gliding on ice at a rink or frozen pond, offering fun and exercise.",
-        "why_worth": "Ice skating improves balance and coordination while providing a festive activity."
-    }
+	{
+		"description": "A fast-paced paddle sport combining tennis, badminton, and ping-pong, played on a smaller court with a perforated plastic ball.",
+		"google_link": "https://www.google.com/search?q=Pickleball+near+me",
+		"id": 3,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Pickleball%20near%20me",
+		"name": "Pickleball",
+		"why_worth": "It's great for cardiovascular health and social interaction.",
+		"youtube_link": "https://www.youtube.com/watch?v=kqLRRNOpe8U"
+	},
+	{
+		"description": "Exchange puzzles with friends and family to enjoy new challenges and foster community connections.",
+		"google_link": "https://www.google.com/search?q=Puzzle+Swap+near+me",
+		"id": 4,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Puzzle%20Swap%20near%20me",
+		"name": "Puzzle Swap",
+		"why_worth": "This activity stimulates the brain and encourages bonding through shared interests.",
+		"youtube_link": "https://www.youtube.com/watch?v=Lz-JOvp0Des"
+	},
+	{
+		"description": "A gentle martial art focused on slow, flowing movements that improve balance, flexibility, and mental tranquility.",
+		"google_link": "https://www.google.com/search?q=Tai+Chi+near+me",
+		"id": 5,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Tai%20Chi%20near%20me",
+		"name": "Tai Chi",
+		"why_worth": "Practicing Tai Chi can reduce stress and enhance overall well-being.",
+		"youtube_link": ""
+	},
+	{
+		"description": "An interactive game where participants solve a fictional crime, providing entertainment and stimulating problem-solving skills.",
+		"google_link": "https://www.google.com/search?q=Murder+Mystery+Night+near+me",
+		"id": 6,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Murder%20Mystery%20Night%20near%20me",
+		"name": "Murder Mystery Night",
+		"why_worth": "It encourages teamwork and creativity.",
+		"youtube_link": "https://www.youtube.com/watch?v=eG3botJCppk"
+	},
+	{
+		"description": "Observing stars and celestial objects, offering relaxation and a sense of wonder about the universe.",
+		"google_link": "https://www.google.com/search?q=Stargazing+near+me",
+		"id": 7,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Stargazing%20near%20me",
+		"name": "Stargazing",
+		"why_worth": "This activity can be both educational and calming, promoting a connection to nature.",
+		"youtube_link": "https://www.youtube.com/watch?v=2a8PgqWrc_4"
+	},
+	{
+		"description": "A communal meal where everyone brings a dish, fostering social interaction and culinary creativity.",
+		"google_link": "https://www.google.com/search?q=Potluck+Dinner+near+me",
+		"id": 8,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Potluck%20Dinner%20near%20me",
+		"name": "Potluck Dinner",
+		"why_worth": "Sharing food brings people together and introduces diverse cuisines.",
+		"youtube_link": ""
+	},
+	{
+		"description": "Playing a variety of board games with friends or family, encouraging strategic thinking and fun.",
+		"google_link": "https://www.google.com/search?q=Board+Game+Night+near+me",
+		"id": 9,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Board%20Game%20Night%20near%20me",
+		"name": "Board Game Night",
+		"why_worth": "It strengthens relationships and improves cognitive functions.",
+		"youtube_link": ""
+	},
+	{
+		"description": "Walking in nature, providing physical exercise, fresh air, and scenic beauty.",
+		"google_link": "https://www.google.com/search?q=Hiking+near+me",
+		"id": 10,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Hiking%20near%20me",
+		"name": "Hiking",
+		"why_worth": "Hiking boosts mental health and offers a break from the daily routine.",
+		"youtube_link": "https://www.youtube.com/watch?v=CVpWi9qXErM"
+	},
+	{
+		"description": "Singing favorite songs, boosting confidence and providing entertainment.",
+		"google_link": "https://www.google.com/search?q=Karaoke+Night+near+me",
+		"id": 11,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Karaoke%20Night%20near%20me",
+		"name": "Karaoke Night",
+		"why_worth": "It's a fun way to relieve stress and connect with others through music.",
+		"youtube_link": "https://www.youtube.com/watch?v=VaB_FpP3nVA"
+	},
+	{
+		"description": "Learning new dance styles, offering physical exercise and improving coordination.",
+		"google_link": "https://www.google.com/search?q=Dance+Class+near+me",
+		"id": 12,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Dance%20Class%20near%20me",
+		"name": "Dance Class",
+		"why_worth": "Dancing is a joyful way to stay fit and meet new people.",
+		"youtube_link": "https://www.youtube.com/watch?v=Kd-Va1m4s1E"
+	},
+	{
+		"description": "Reading and discussing books, expanding knowledge, and fostering community.",
+		"google_link": "https://www.google.com/search?q=Book+Club+near+me",
+		"id": 13,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Book%20Club%20near%20me",
+		"name": "Book Club",
+		"why_worth": "It encourages critical thinking and introduces diverse perspectives.",
+		"youtube_link": ""
+	},
+	{
+		"description": "Competing in trivia games, challenging knowledge, and enjoying friendly competition.",
+		"google_link": "https://www.google.com/search?q=Trivia+Night+near+me",
+		"id": 14,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Trivia%20Night%20near%20me",
+		"name": "Trivia Night",
+		"why_worth": "This activity sharpens the mind and is entertaining for all ages.",
+		"youtube_link": "https://www.youtube.com/watch?v=TtS-2K8_qm8"
+	},
+	{
+		"description": "Practicing yoga, which enhances flexibility, strength, and mental clarity.",
+		"google_link": "https://www.google.com/search?q=Yoga+Session+near+me",
+		"id": 15,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Yoga%20Session%20near%20me",
+		"name": "Yoga Session",
+		"why_worth": "Yoga reduces stress and improves overall physical and mental health.",
+		"youtube_link": "https://www.youtube.com/watch?v=j7rKKpwdXNE"
+	},
+	{
+		"description": "Spending a day at the beach, enjoying activities like swimming, sunbathing, and playing beach games.",
+		"google_link": "https://www.google.com/search?q=Beach+Day+near+me",
+		"id": 16,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Beach%20Day%20near%20me",
+		"name": "Beach Day",
+		"why_worth": "It's a great way to relax, have fun, and soak up some Vitamin D.",
+		"youtube_link": "https://www.youtube.com/watch?v=Pw-pWL912nM"
+	},
+	{
+		"description": "Learning to create pottery pieces, enhancing creativity, and providing a sense of accomplishment.",
+		"google_link": "https://www.google.com/search?q=Pottery+Class+near+me",
+		"id": 17,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Pottery%20Class%20near%20me",
+		"name": "Pottery Class",
+		"why_worth": "Working with clay can be therapeutic and helps develop fine motor skills.",
+		"youtube_link": ""
+	},
+	{
+		"description": "Sampling a variety of wines, learning about different flavors and origins.",
+		"google_link": "https://www.google.com/search?q=Wine+Tasting+near+me",
+		"id": 18,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Wine%20Tasting%20near%20me",
+		"name": "Wine Tasting",
+		"why_worth": "It's an enjoyable way to refine your palate and socialize with others.",
+		"youtube_link": "https://www.youtube.com/watch?v=MQudXFxBpPw"
+	},
+	{
+		"description": "Soaring through the air on a zip line, offering an exhilarating adventure and stunning views.",
+		"google_link": "https://www.google.com/search?q=Zip+Lining+near+me",
+		"id": 19,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Zip%20Lining%20near%20me",
+		"name": "Zip Lining",
+		"why_worth": "It's a thrilling way to overcome fears and enjoy nature from a different perspective.",
+		"youtube_link": "https://www.youtube.com/watch?v=3pq8SjkiMW0"
+	},
+	{
+		"description": "Spending a night or more in the wilderness, engaging in activities like hiking, fishing, and campfires.",
+		"google_link": "https://www.google.com/search?q=Camping+near+me",
+		"id": 20,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Camping%20near%20me",
+		"name": "Camping",
+		"why_worth": "Camping reconnects you with nature and offers a break from technology and daily stress.",
+		"youtube_link": "https://www.youtube.com/watch?v=q5qwrjRajPQ"
+	},
+	{
+		"description": "Practicing shooting arrows at a target, improving focus and hand-eye coordination.",
+		"google_link": "https://www.google.com/search?q=Archery+near+me",
+		"id": 21,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Archery%20near%20me",
+		"name": "Archery",
+		"why_worth": "Archery is both a mental and physical challenge, enhancing concentration and discipline.",
+		"youtube_link": "https://www.youtube.com/watch?v=NYz4p7YRmv0"
+	},
+	{
+		"description": "Learning the energetic and rhythmic moves of salsa dancing.",
+		"google_link": "https://www.google.com/search?q=Salsa+Dancing+near+me",
+		"id": 22,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Salsa%20Dancing%20near%20me",
+		"name": "Salsa Dancing",
+		"why_worth": "It's a fun way to exercise, improve coordination, and meet new people.",
+		"youtube_link": "https://www.youtube.com/watch?v=vwGp16NXgQU"
+	},
+	{
+		"description": "Climbing indoor or outdoor rock walls, building strength and overcoming challenges.",
+		"google_link": "https://www.google.com/search?q=Rock+Climbing+near+me",
+		"id": 23,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Rock%20Climbing%20near%20me",
+		"name": "Rock Climbing",
+		"why_worth": "Rock climbing improves physical fitness and boosts confidence.",
+		"youtube_link": "https://www.youtube.com/watch?v=ojDvWrMwjX4"
+	},
+	{
+		"description": "Balancing on a paddleboard while navigating the water, providing a full-body workout.",
+		"google_link": "https://www.google.com/search?q=Stand-Up+Paddleboarding+near+me",
+		"id": 24,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Stand-Up%20Paddleboarding%20near%20me",
+		"name": "Stand-Up Paddleboarding",
+		"why_worth": "Paddleboarding enhances core strength and offers a peaceful water experience.",
+		"youtube_link": "https://www.youtube.com/watch?v=ES2mShoQ3_Q"
+	},
+	{
+		"description": "Riding horses, improving balance, coordination, and a connection with animals.",
+		"google_link": "https://www.google.com/search?q=Horseback+Riding+near+me",
+		"id": 25,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Horseback%20Riding%20near%20me",
+		"name": "Horseback Riding",
+		"why_worth": "Horseback riding is both relaxing and invigorating, offering a unique way to enjoy the outdoors.",
+		"youtube_link": "https://www.youtube.com/watch?v=cisB7ixZlmw"
+	},
+	{
+		"description": "Visiting local art galleries to appreciate different forms of art and culture.",
+		"google_link": "https://www.google.com/search?q=Art+Gallery+Tour+near+me",
+		"id": 26,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Art%20Gallery%20Tour%20near%20me",
+		"name": "Art Gallery Tour",
+		"why_worth": "It's an enriching experience that fosters creativity and cultural appreciation.",
+		"youtube_link": "https://www.youtube.com/watch?v=rFYgGG2Rgd0"
+	},
+	{
+		"description": "Spending time meditating to practice mindfulness and relaxation.",
+		"google_link": "https://www.google.com/search?q=Meditation+near+me",
+		"id": 27,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Meditation%20near%20me",
+		"name": "Meditation",
+		"why_worth": "It helps reduce stress and enhances mental clarity and emotional well-being.",
+		"youtube_link": "https://www.youtube.com/watch?v=Yof92IXwgQ4"
+	},
+	{
+		"description": "Preparing a dinner based on a specific theme or cuisine.",
+		"google_link": "https://www.google.com/search?q=Cooking+a+Themed+Dinner+near+me",
+		"id": 28,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Cooking%20a%20Themed%20Dinner%20near%20me",
+		"name": "Cooking a Themed Dinner",
+		"why_worth": "It's a creative and educational way to explore new cultures and flavors.",
+		"youtube_link": "https://www.youtube.com/watch?v=SMfYLjjIcVU"
+	},
+	{
+		"description": "Going on a biking trail, enjoying the scenery, and getting a good workout.",
+		"google_link": "https://www.google.com/search?q=Biking+Adventure+near+me",
+		"id": 29,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Biking%20Adventure%20near%20me",
+		"name": "Biking Adventure",
+		"why_worth": "Biking is a fun and eco-friendly way to explore new areas and stay active.",
+		"youtube_link": "https://www.youtube.com/watch?v=AAfcHMdPQ20"
+	},
+	{
+		"description": "Watching a series of movies from a specific genre or director, often with themed snacks.",
+		"google_link": "https://www.google.com/search?q=Film+Festival+Night+near+me",
+		"id": 30,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Film%20Festival%20Night%20near%20me",
+		"name": "Film Festival Night",
+		"why_worth": "It’s an entertaining way to appreciate cinema and discuss different films.",
+		"youtube_link": "https://www.youtube.com/watch?v=v3P_UvYOQgw"
+	},
+	{
+		"description": "Navigating a small boat on a calm lake or river, providing relaxation and a mild workout.",
+		"google_link": "https://www.google.com/search?q=Paddle+Boating+near+me",
+		"id": 31,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Paddle%20Boating%20near%20me",
+		"name": "Paddle Boating",
+		"why_worth": "Paddle boating is a serene way to enjoy nature and spend quality time with friends or family.",
+		"youtube_link": "https://www.youtube.com/watch?v=uoOw9hrVQbk"
+	},
+	{
+		"description": "Playing a round of mini golf on a themed course, combining fun and mild physical activity.",
+		"google_link": "https://www.google.com/search?q=Mini+Golf+near+me",
+		"id": 32,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Mini%20Golf%20near%20me",
+		"name": "Mini Golf",
+		"why_worth": "It’s a lighthearted way to enjoy outdoor recreation with others.",
+		"youtube_link": "https://www.youtube.com/watch?v=9bfOP0uRQug"
+	},
+	{
+		"description": "Touring historical sites or museums to learn about local history and culture.",
+		"google_link": "https://www.google.com/search?q=Historical+Site+Visit+near+me",
+		"id": 33,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Historical%20Site%20Visit%20near%20me",
+		"name": "Historical Site Visit",
+		"why_worth": "It’s an educational activity that enriches knowledge and perspective.",
+		"youtube_link": "https://www.youtube.com/watch?v=fq70UHD8DrM"
+	},
+	{
+		"description": "Paddling through rivers, lakes, or coastal waters, offering adventure and a full-body workout.",
+		"google_link": "https://www.google.com/search?q=Kayaking+near+me",
+		"id": 34,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Kayaking%20near%20me",
+		"name": "Kayaking",
+		"why_worth": "Kayaking connects you with nature and improves physical fitness.",
+		"youtube_link": "https://www.youtube.com/watch?v=TAEkR13ChPs"
+	},
+	{
+		
+		"description": "Gliding along cables through treetop canopies, offering adrenaline and stunning views.",
+		"google_link": "https://www.google.com/search?q=Ziplining+near+me",
+		"id": 35,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Ziplining%20near%20me",
+		"name": "Ziplining",
+		"why_worth": "Ziplining is exhilarating and a great way to experience nature.",
+		"youtube_link": "https://www.youtube.com/watch?v=mrBrfKi4vpI"
+	},
+	{
+		"description": "Visiting a botanical garden to appreciate diverse plant species and beautiful landscapes.",
+		"google_link": "https://www.google.com/search?q=Botanical+Garden+Tour+near+me",
+		"id": 36,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Botanical%20Garden%20Tour%20near%20me",
+		"name": "Botanical Garden Tour",
+		"why_worth": "This activity is relaxing, educational, and visually pleasing.",
+		"youtube_link": "https://www.youtube.com/watch?v=FSotOLHxB5M"
+	},
+	{
+		"description": "Gliding on ice at a rink or frozen pond, offering fun and exercise.",
+		"google_link": "https://www.google.com/search?q=Ice+Skating+near+me",
+		"id": 37,
+		"meetup_link": "https://www.meetup.com/find/?keywords=Ice%20Skating%20near%20me",
+		"name": "Ice Skating",
+		"why_worth": "Ice skating improves balance and coordination while providing a festive activity.",
+		"youtube_link": "https://www.youtube.com/watch?v=XcDw55IWWYQ"
+	}
 ]
 
 
@@ -191,6 +332,9 @@ for activity_data in cherry_picked_activities:
         name=activity_data['name'],
         description=activity_data['description'],
         why_worth=activity_data['why_worth'],
+        youtube_link=activity_data['youtube_link'],
+        google_link=activity_data['google_link'],
+        meetup_link=activity_data['meetup_link'],
         cherry_picked=True
     )
     db.session.add(new_activity)
