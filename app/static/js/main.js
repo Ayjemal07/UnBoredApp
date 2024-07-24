@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to fetch and display cherry-picked activities
     const fetchCherryPickedActivities = async (page) => {
         try {
-            const response = await fetch(`/activities?page=${page}&per_page=${perPage}`);
+            const response = await fetch(`/activityset?page=${page}&per_page=${perPage}`);
             const data = await response.json();
 
             if (data.length === 0) {
@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 nextButton.disabled = true; // Disable next button if no more activities
                 return; // No more activities to load
             }
+
+            sliderList.innerHTML = ''; // Clear previous content
 
             data.forEach(activity => {
                 const listItem = document.createElement('li');
@@ -143,6 +145,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
                 sliderList.appendChild(listItem);
             });
+
+            // Enable next button if there are more activities
+            nextButton.disabled = false;
+
         } catch (error) {
             console.error('Error fetching cherry-picked activities:', error);
         }
