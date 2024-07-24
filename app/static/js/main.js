@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to fetch activity data
     const fetchActivity = async () => {
         try {
-            console.log('Showing spinner');
             // Show spinner
             spinner.style.display = 'block';
 
@@ -81,8 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             activityContainer.appendChild(activityCard);
 
-            // Delay hiding the spinner 
-            console.log('Hiding spinner');
             spinner.style.display = 'none';
             // Show the activity container and the next button
             activityContainer.style.display = 'block';
