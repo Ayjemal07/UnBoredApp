@@ -2,14 +2,26 @@
 let currentVideoId = ''; // Store the current video ID
 let clickCount = 0;
 
-
 //Activity Suggestion Generation Logic
 document.addEventListener('DOMContentLoaded', function () {
     const suggestButton = document.getElementById('suggest-button');
-    const nextSuggest = document.getElementById('next-suggest');
     const activityContainer = document.getElementById('activity-container');
-    let spinner = document.getElementById('spinner');
+    const spinner = document.getElementById('spinner');
 
+    // Create and initialize the next-suggest button
+    const nextSuggestButton = document.createElement('button');
+    nextSuggestButton.id = 'next-suggest';
+    nextSuggestButton.className = 'next-suggest';
+    nextSuggestButton.innerHTML = 'Next suggestion <span class="arrow-right"></span><span class="arrow-right"></span><span class="arrow-right"></span>';
+    nextSuggestButton.style.display = 'none'; // Initially hidden
+    nextSuggestButton.disabled = true; // Initially disabled
+
+    // Event listener for next-suggest button
+    nextSuggestButton.addEventListener('click', async () => {
+        clickCount += 1;
+        console.log('Next suggest button clicked');
+        await fetchActivity();
+    }, { passive: true });
 
     // Event listener for initial suggestion
     suggestButton.addEventListener('click', async () => {
@@ -18,22 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
         await fetchActivity();
     }, { passive: true });
 
-    // Event listener for next suggestion
-    nextSuggest.addEventListener('click', async () => {
-        clickCount += 1;
-        console.log('Next suggest button clicked');
-        await fetchActivity();
-    }, { passive: true });
-
-    const upperCaseName = (act_name) => act_name.toUpperCase();
-
     // Function to fetch activity data
     const fetchActivity = async () => {
         try {
             // Show spinner
             spinner.style.display = 'block';
-            nextSuggest.disabled = true; // Disable the next suggestion button
+            // Disable suggest button
+            suggestButton.style.display = 'none';
 
+            // Disable next-suggest button
+            nextSuggestButton.disabled = true;
 
             const response = await fetch(`/suggest_activity?clickCount=${clickCount}`);
             const data = await response.json();
@@ -73,28 +79,31 @@ document.addEventListener('DOMContentLoaded', function () {
                             <a href="${data.google}" target="_blank">Google this activity near you</a>
                             <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch more videos of this activity</a><br>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             `;
 
+            activityCard.appendChild(nextSuggestButton);
             activityContainer.appendChild(activityCard);
 
-            spinner.style.display = 'none';
             // Show the activity container and the next button
             activityContainer.style.display = 'block';
-            nextSuggest.style.display = 'inline-block';
-            nextSuggest.disabled = false; // Re-enable the next suggestion button
+            nextSuggestButton.style.display = 'inline-block'; // Make button visible
+            nextSuggestButton.disabled = false; // Enable button
 
+            spinner.style.display = 'none';
 
-            // Hide the suggest button
-            suggestButton.style.display = 'none';
         } catch (error) {
             console.error('Error fetching activity:', error);
             spinner.style.display = 'none';
-            nextSuggest.disabled = false; // Re-enable the next suggestion button on error
+            nextSuggestButton.disabled = false; // Ensure button is enabled even if there's an error
         }
     };
+
+    const upperCaseName = (act_name) => act_name.toUpperCase();
 });
+
+
 
 
 //Slider List Logic

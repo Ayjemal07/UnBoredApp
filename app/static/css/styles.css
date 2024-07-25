@@ -29,7 +29,7 @@ body {
 }
 
 /* Buttons */
-.suggestion-button, .next-suggest {
+.suggestion-button{
     display: inline-block; /* Ensure both buttons are inline-block */
     width: 300px;
     padding: 25px; /* Increase padding for a bigger button */
@@ -41,7 +41,23 @@ body {
     border-radius: 10px; /* Increase border-radius for a more rounded button */
     cursor: pointer;
     transition: background 0.3s ease; /* Smooth transition for hover effect */
-    margin-top: 28px;
+    margin-top: 22px;
+}
+
+
+.next-suggest{
+    width: 235px;
+    padding: 22px; /* Increase padding for a bigger button */
+    font-size: 18px; /* Increase font size for larger text */
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, #4caf50, #7bdcb5); /* Greenish bright gradient */
+    border: none;
+    border-radius: 10px; /* Increase border-radius for a more rounded button */
+    cursor: pointer;
+    transition: background 0.3s ease; /* Smooth transition for hover effect */
+    margin-top: 10px;
+    
 }
 
 @keyframes flash {
@@ -63,7 +79,27 @@ body {
 }
 
 .next-suggest {
+    position: absolute;
+    bottom: -3px;
+    right: -25px; /* Adjust positioning from the right */
     display: none; /* Initially hidden */
+}
+
+
+/* Arrow styling */
+.arrow-right {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid white;
+    border-right: 3px solid white;
+    transform: rotate(45deg);
+    margin-left: -5px; /* Reduced space between arrows */
+
+}
+
+.next-suggest:hover .arrow-right {
+    transform: rotate(45deg) translateX(5px); /* Move the arrow slightly on hover */
 }
 
 /* Disabled button styling */
@@ -207,7 +243,7 @@ button:disabled {
     overflow: hidden; /* Ensure text doesn't overflow */
     max-width: 80%; /* Adjust the width to fit better */
     margin: 0 auto; /* Center the card */
-    max-height: 400px; /* Limit the card's height */
+    position: relative;
 }
 
 .activity-card:hover {
@@ -215,7 +251,7 @@ button:disabled {
 }
 
 .activity-card h2 {
-    font-size: 25px; /* Reduce font size */
+    font-size: 29px; /* Reduce font size */
     color: #1a5319; /* Dark green color for the title */
     background-color: hwb(0 96% 4%); /* Light background color for contrast */
     padding: 5px; /* Reduce padding around text */
@@ -224,12 +260,13 @@ button:disabled {
     font-weight: bold; /* Make the text bold */
     margin-bottom: 15px; /* Reduce space below heading */
     letter-spacing: 0.5px; /* Adjust letter-spacing */
+    
 }
 
 .activity-card p {
-    font-size: 18px; /* Reduce font size */
+    font-size: 22px; /* Reduce font size */
     color: #5a5a5a; /* Slightly darker grey */
-    margin-bottom: 10px; /* Reduce margin-bottom */
+    margin-bottom: 4px; /* Reduce margin-bottom */
     font-family: 'Georgia', serif; /* Change the font */
     padding: 5px; /* Reduce padding */
     border-radius: 5px;
@@ -237,10 +274,10 @@ button:disabled {
 
 .activity-card a {
     display: inline-block;
-    font-size: 18px; /* Reduce font size */
+    font-size: 21px; /* Reduce font size */
     color: #fff; /* Set text color to white */
     text-decoration: none;
-    padding: 5px 10px; /* Adjust padding */
+    padding: 5px 9px; /* Adjust padding */
     border: 3px solid #495f49;
     border-radius: 8px; /* Adjust border-radius */
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
