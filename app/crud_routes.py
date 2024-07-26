@@ -78,39 +78,6 @@ def delete_activity(id):
 
     return jsonify({'message': 'Activity deleted successfully'}), 200
 
-# Functions to generate YouTube, Google, and Meetup links
-
-def get_youtube_link(activity_name):
-    youtube_api_key = os.getenv('YOUTUBE_API_KEY')
-    if not youtube_api_key:
-        raise ValueError("YouTube API key not found in environment variables")
-
-    youtube = build('youtube', 'v3', developerKey=youtube_api_key)
-    
-    request = youtube.search().list(
-        q=activity_name,
-        part='snippet',
-        maxResults=1
-    )
-    response = request.execute()
-    
-    if response['items']:
-        first_item = response['items'][0]
-        if 'id' in first_item and 'videoId' in first_item['id']:
-            video_id = first_item['id']['videoId']
-            return f'https://www.youtube.com/watch?v={video_id}'
-    
-    return ''
-
-
-def get_google_link(activity_name):
-    query = f"{activity_name} near me"
-    return f"https://www.google.com/search?q={query.replace(' ', '+')}"
-
-# Function to get Meetup search link
-def get_meetup_link(activity_name):
-    query = f"{activity_name} near me"
-    return f"https://www.meetup.com/find/?keywords={query.replace(' ', '%20')}"
 
 
 @crud.route('/login', methods = ['POST'])

@@ -2,7 +2,7 @@
 let currentVideoId = ''; // Store the current video ID
 let clickCount = 0;
 
-//Activity Suggestion Generation Logic
+// Activity Suggestion Generation Logic
 document.addEventListener('DOMContentLoaded', function () {
     const suggestButton = document.getElementById('suggest-button');
     const activityContainer = document.getElementById('activity-container');
@@ -30,25 +30,17 @@ document.addEventListener('DOMContentLoaded', function () {
         await fetchActivity();
     }, { passive: true });
 
-    // Function to fetch activity data
-    const fetchActivity = async () => {
+    // Function to fetch and display activity data
+    const displayActivity = async (data) => {
         try {
             // Show spinner
             spinner.style.display = 'block';
-            // Disable suggest button
-            suggestButton.style.display = 'none';
-
-            // Disable next-suggest button
-            nextSuggestButton.disabled = true;
-
-            const response = await fetch(`/suggest_activity?clickCount=${clickCount}`);
-            const data = await response.json();
-
-            console.log('Activity fetched:', data);
 
             // Extract video ID from YouTube URL
             const urlParams = new URL(data.youtube).searchParams;
             currentVideoId = urlParams.get('v');
+            console.log('YouTube URL:', data.youtube);
+
 
             const embedUrl = `https://www.youtube-nocookie.com/embed/${currentVideoId}?origin=${window.location.origin}`;
 
@@ -81,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>
                 </div>
+                <button id="next-suggest" class="next-suggest">Next suggestion 
+                <span class="arrow-right"></span>
+                <span class="arrow-right"></span>
+                <span class="arrow-right"></span>
+                </button>
             `;
 
             activityCard.appendChild(nextSuggestButton);
@@ -94,14 +91,70 @@ document.addEventListener('DOMContentLoaded', function () {
             spinner.style.display = 'none';
 
         } catch (error) {
+            console.error('Error displaying activity:', error);
+            spinner.style.display = 'none';
+            nextSuggestButton.disabled = false; // Ensure button is enabled even if there's an error
+        }
+    };
+
+    // Function to fetch activity data
+    const fetchActivity = async () => {
+        try {
+            // Show spinner
+            spinner.style.display = 'block';
+            // Disable suggest button
+            suggestButton.style.display = 'none';
+            // Disable next-suggest button
+            nextSuggestButton.disabled = true;
+
+            const response = await fetch(`/suggest_activity?clickCount=${clickCount}`);
+            const data = await response.json();
+
+            console.log('Activity fetched:', data);
+            await displayActivity(data);
+
+        } catch (error) {
             console.error('Error fetching activity:', error);
             spinner.style.display = 'none';
             nextSuggestButton.disabled = false; // Ensure button is enabled even if there's an error
         }
     };
 
+    // Function to handle 'Engage Now' button click
+    const handleEngageNowClick = async (activityId) => {
+        try {
+            // Show spinner
+            spinner.style.display = 'block';
+            // Disable suggest button
+            suggestButton.style.display = 'none';
+            // Disable next-suggest button
+            nextSuggestButton.disabled = true;
+
+            const response = await fetch(`/activities/${activityId}`);
+            const data = await response.json();
+
+            console.log('Activity fetched:', data);
+            await displayActivity(data);
+
+        } catch (error) {
+            console.error('Error fetching activity:', error);
+            spinner.style.display = 'none';
+            nextSuggestButton.disabled = false; // Ensure button is enabled even if there's an error
+        }
+    };
+
+    // Event delegation for Engage Now button clicks
+    document.addEventListener('click', async (event) => {
+        if (event.target && event.target.classList.contains('engage-now')) {
+            event.preventDefault(); // Prevent the default link action
+            const activityId = event.target.getAttribute('data-activity-id');
+            await handleEngageNowClick(activityId);
+        }
+    }, { passive: false });
+    
     const upperCaseName = (act_name) => act_name.toUpperCase();
 });
+
 
 
 
@@ -113,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.querySelector('.prev-button');
     const nextButton = document.querySelector('.next-button');
     let currentPage = 1;
-    const perPage = 6; // Number of items per page
+    const perPage = 4; // Number of items per page
 
     // Function to fetch and display cherry-picked activities
     const fetchCherryPickedActivities = async (page) => {
@@ -146,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                         </header>
                         <footer class="card__footer">
-                            <a class="button" href="${activity.google_link}" aria-label="ENGAGE NOW">ENGAGE NOW</a>
+                            <a class="button engage-now" data-activity-id="${activity.id}" aria-label="ENGAGE NOW">ENGAGE NOW</a>
                         </footer>
                     </article>
                 `;

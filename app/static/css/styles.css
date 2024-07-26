@@ -41,7 +41,7 @@ body {
     border-radius: 10px; /* Increase border-radius for a more rounded button */
     cursor: pointer;
     transition: background 0.3s ease; /* Smooth transition for hover effect */
-    margin-top: 22px;
+    margin-top: 54px;
 }
 
 
@@ -112,23 +112,38 @@ button:disabled {
 
 /* Slider Styling */
 .slider-container {
-    position: relative;
-    width: 100%; /* Adjust this as needed */
-    max-width: 1200px; /* Adjust to your desired max width */
-    margin: auto;
-    background-color: rgb(181, 216, 181);
     display: flex;
     align-items: center;
-    overflow: hidden; /* Ensures no content spills out */
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    background-color: rgb(181, 216, 181);
+    overflow: hidden;
+}
+
+.top-picks {
+    font-size: 1.7em;
+    margin-right: 20px;
+    color: #000;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.slider-wrapper {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
 }
 
 .slider {
-    position: relative; /* Make sure the slider is positioned relative for button positioning */
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    overflow: hidden; /* Hide overflow for the slider */
+    overflow: hidden; /* Hide overflow for slider content */
+    position: relative; /* Make sure slider is positioned relative */
 }
 
 .slider__list {
@@ -136,39 +151,39 @@ button:disabled {
     list-style: none;
     padding: 0;
     margin: 0;
-    transition: transform 0.5s ease; /* Smooth transition for sliding */
+    transition: transform 0.5s ease;
 }
 
 .slider__item {
     flex: 0 0 auto;
-    margin-right: 10px; /* Adjust the gap between items */
+    margin-right: 10px;
 }
 
 .card {
-    width: 250px; /* Set a fixed width for the card */
-    height: 350px; /* Set a fixed height for the card */
-    padding: 20px; /* Add padding to the card */
+    width: 250px;
+    height: 350px;
+    padding: 20px;
     border: 4px solid #7bbd00;
     border-radius: 12px;
-    background-color: white; /* Background color of the card */
+    background-color: white;
     color: black;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribute space evenly between header, content, and footer */
+    justify-content: space-between;
     box-sizing: border-box;
 }
 
 .card__thumbnail {
     width: 100%;
-    height: 150px; /* Set a fixed height for the image container */
-    overflow: hidden; /* Hide overflow */
+    height: 150px;
+    overflow: hidden;
     border-radius: 8px;
 }
 
 .card__thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the whole area without stretching */
+    object-fit: cover;
 }
 
 .card__header {
@@ -200,29 +215,33 @@ button:disabled {
 
 .nav-button {
     position: absolute;
-    top: 50%;
+    top: 32%;
     transform: translateY(-50%);
-    background-color: gray;
+    background-color: black;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     z-index: 1;
-    font-size: 24px; /* Larger font for better visibility */
-    transition: background-color 0.3s ease; /* Smooth transition for button hover effect */
+    font-size: 32px;
+    transition: background-color 0.3s ease;
 }
 
 .nav-button:hover {
-    background-color: darkgray; /* Button hover effect */
+    background-color: rgb(169, 169, 169);
 }
 
 .prev-button {
-    left: -2px; /* Move left button further outside */
+    left: 0px; /* Adjust this value to move the button outside the last card */
 }
 
 .next-button {
-    right: -2px; /* Move right button further outside */
+    right: 24px; /* Adjust this value to move the button outside the last card */
 }
+
+
+
+
 
 /* Activity suggestion CSS */
 .activity-container {

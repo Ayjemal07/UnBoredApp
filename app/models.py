@@ -88,8 +88,8 @@ class Activity(db.Model):
             'name': self.name,
             'description': self.description,
             'why_worth': self.why_worth,
-            'google_link':self.google_link,
-            'youtube_link':self.youtube_link,
-            'meetup_link':self.meetup_link,
+            'google':self.google_link,
+            'youtube':self.youtube_link,
+            'meetup':self.meetup_link,
             'cherry_picked': self.cherry_picked
         }
