@@ -1,8 +1,28 @@
 // Define global variables
 let currentVideoId = ''; // Store the current video ID
 let clickCount = 0;
+let sessionTimeout; // Define session timeout variable
 
-// Activity Suggestion Generation Logic
+// Reset session timeout function
+function resetSessionTimeout() {
+    // Clear any existing timeout
+    clearTimeout(sessionTimeout);
+
+    // Set a new timeout for 10 minutes
+    sessionTimeout = setTimeout(function() {
+        console.log("Session reset due to inactivity");
+        navigator.sendBeacon("/reset_session");
+    }, 600000); // 10 minutes
+}
+
+// Initial session timeout reset on page load
+window.addEventListener("load", resetSessionTimeout);
+
+// User interactions that reset the timeout
+document.addEventListener('click', resetSessionTimeout);
+document.addEventListener('scroll', resetSessionTimeout);
+
+// Other existing event listeners here
 document.addEventListener('DOMContentLoaded', function () {
     const suggestButton = document.getElementById('suggest-button');
     const activityContainer = document.getElementById('activity-container');
@@ -40,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URL(data.youtube).searchParams;
             currentVideoId = urlParams.get('v');
             console.log('YouTube URL:', data.youtube);
-
 
             const embedUrl = `https://www.youtube-nocookie.com/embed/${currentVideoId}?origin=${window.location.origin}`;
 
@@ -151,15 +170,11 @@ document.addEventListener('DOMContentLoaded', function () {
             await handleEngageNowClick(activityId);
         }
     }, { passive: false });
-    
+
     const upperCaseName = (act_name) => act_name.toUpperCase();
 });
 
-
-
-
-
-//Slider List Logic
+// Slider List Logic
 
 document.addEventListener('DOMContentLoaded', function () {
     const sliderList = document.getElementById('slider-list');
@@ -237,9 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
     prevButton.addEventListener('click', loadPreviousSlide);
 });
 
-
-
-//Navbar Hiding when Scrolling:
+// Navbar Hiding when Scrolling
 
 let lastScrollTop = 0;
 
@@ -257,9 +270,8 @@ document.addEventListener('scroll', function() {
 
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
 });
-// Session Handling logic
-let sessionTimeout;
 
+// Session Handling logic
 window.addEventListener("beforeunload", function () {
     // Send a request to invalidate the session when the tab is closed
     navigator.sendBeacon("/reset_session");
@@ -272,21 +284,3 @@ window.addEventListener("blur", function() {
         navigator.sendBeacon("/reset_session");
     }, 3600000); 
 });
-
-// Optional: Handle page load
-window.addEventListener("load", function() {
-    // Reset any existing session timeouts on load
-    clearTimeout(sessionTimeout);
-});
-
-// Example of optimized setTimeout usage
-function performTasks() {
-    setTimeout(() => {
-        // Perform part of the task
-        taskPart1();
-        setTimeout(() => {
-            // Continue with more tasks
-            taskPart2();
-        }, 0);
-    }, 0);
-}

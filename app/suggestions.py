@@ -15,6 +15,7 @@ main = Blueprint('main', __name__)
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 
+
 def get_youtube_link(activity_name):
     """
     Gets a YouTube video link for the given activity name, using broader search and ranking.
@@ -35,8 +36,8 @@ def get_youtube_link(activity_name):
 
     search_terms = [
         activity_name,
-        f"What is {activity_name}",
-        f"how to {activity_name}"
+        f"{activity_name} tutorial",
+        f"{activity_name} basics"
     ]
 
     try:
@@ -195,7 +196,7 @@ def suggest_activity():
 
     else:
         print("here")
-        selected_activity = get_chatgpt_activity(exclude_activities=seen_activities)
+        selected_activity = get_chatgpt_activity(seen_activities)
         seen_activities.append(selected_activity['name'])
         print(seen_activities)
     
@@ -225,5 +226,5 @@ def suggest_activity():
 def reset_session():
     session.pop('click_count', None)
     session.pop('seen_activities', None)
-    print("was reset")
+    print("Session after reset:", session)
     return jsonify({"message": "Session reset"})

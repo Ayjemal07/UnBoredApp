@@ -17,4 +17,4 @@ class Config:
 
 
         # Set session timeout (example: 30 minutes)
-    PERMANENT_SESSION_LIFETIME = 60  # 1800 seconds = 30 minutes, do 1 min for now(for testing)
+    PERMANENT_SESSION_LIFETIME = 300  # 1800 seconds = 30 minutes, do 1 min for now(for testing)

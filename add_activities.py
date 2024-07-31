@@ -41,7 +41,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Stargazing%20near%20me",
 		"name": "Stargazing",
 		"why_worth": "This activity can be both educational and calming, promoting a connection to nature.",
-		"youtube_link": "https://www.youtube.com/watch?v=2a8PgqWrc_4"
+		"youtube_link": "https://www.youtube.com/watch?v=ibL91sASgKQ"
 	},
 	{
 		"description": "Walking in nature, providing physical exercise, fresh air, and scenic beauty.",
@@ -50,7 +50,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Hiking%20near%20me",
 		"name": "Hiking",
 		"why_worth": "Hiking boosts mental health and offers a break from the daily routine.",
-		"youtube_link": "https://www.youtube.com/watch?v=CVpWi9qXErM"
+		"youtube_link": "https://www.youtube.com/watch?v=edElLWvSVLk&t=805s"
 	},
 	{
 		"description": "Singing favorite songs, boosting confidence and providing entertainment.",
@@ -59,7 +59,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Karaoke%20Night%20near%20me",
 		"name": "Karaoke Night",
 		"why_worth": "It's a fun way to relieve stress and connect with others through music.",
-		"youtube_link": "https://www.youtube.com/watch?v=VaB_FpP3nVA"
+		"youtube_link": "https://www.youtube.com/watch?v=tBksosv42Ic"
 	},
 	{
 		"description": "Learning new dance styles, offering physical exercise and improving coordination.",
@@ -104,7 +104,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Wine%20Tasting%20near%20me",
 		"name": "Wine Tasting",
 		"why_worth": "It's an enjoyable way to refine your palate and socialize with others.",
-		"youtube_link": "https://www.youtube.com/watch?v=MQudXFxBpPw"
+		"youtube_link": "https://www.youtube.com/watch?v=QF6xzSyet4U&t=10s"
 	},
 	{
 		"description": "Spending a night or more in the wilderness, engaging in activities like hiking, fishing, and campfires.",
@@ -140,7 +140,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Rock%20Climbing%20near%20me",
 		"name": "Rock Climbing",
 		"why_worth": "Rock climbing improves physical fitness and boosts confidence.",
-		"youtube_link": "https://www.youtube.com/watch?v=ojDvWrMwjX4"
+		"youtube_link": "https://www.youtube.com/watch?v=s-ArwEzr-2M"
 	},
 	{
 		"description": "Balancing on a paddleboard while navigating the water, providing a full-body workout.",
@@ -194,7 +194,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Horseback%20Riding%20near%20me",
 		"name": "Horseback Riding",
 		"why_worth": "Horseback riding is both relaxing and invigorating, offering a unique way to enjoy the outdoors.",
-		"youtube_link": "https://www.youtube.com/watch?v=cisB7ixZlmw"
+		"youtube_link": "https://www.youtube.com/watch?v=fV7kuUrjutY"
 	},
 	{
 		"description": "Visiting local art galleries to appreciate different forms of art and culture.",
@@ -212,7 +212,7 @@ cherry_picked_activities = [
 		"meetup_link": "https://www.meetup.com/find/?keywords=Meditation%20near%20me",
 		"name": "Meditation",
 		"why_worth": "It helps reduce stress and enhances mental clarity and emotional well-being.",
-		"youtube_link": "https://www.youtube.com/watch?v=Yof92IXwgQ4"
+		"youtube_link": "https://www.youtube.com/watch?v=X3rl5O_92Co"
 	},
 	{
 		"description": "Preparing a dinner based on a specific theme or cuisine.",
