@@ -1,13 +1,243 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Form content -->
-    <main class="container p-5">
-        <div class="row">
-            <aside class="col-12 col-md-6">
+<main class="form-container p-5">
+    <div class="form-row">
+        <div class="col-12 mx-auto custom-width">
+            <div class="form-card shadow-sm p-4 mb-4">
+
                 <h2>Create Your Account</h2>
-                {% include 'forms.html' %}
-            </aside>
+                <form id="signupForm">
+                    <div id="step1">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="showStep(2)">Next</button>
+                    </div>
+
+                    <div id="step2" class="d-none">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" class="form-control" id="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            <input type="text" class="form-control" id="location" required>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="showStep(1)">Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="showStep(3)">Next</button>
+                    </div>
+
+                    <div id="step3" class="d-none">
+                        <div class="form-group">
+                            <label for="interests">What are your interests? (Select all that apply)</label><br>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="arts">
+                                <label class="form-check-label" for="arts">Arts</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="sports">
+                                <label class="form-check-label" for="sports">Sports</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="nature">
+                                <label class="form-check-label" for="nature">Nature</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="music">
+                                <label class="form-check-label" for="music">Music</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="technology">
+                                <label class="form-check-label" for="technology">Technology</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="reading">
+                                <label class="form-check-label" for="reading">Reading</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="travel">
+                                <label class="form-check-label" for="travel">Travel</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="cooking">
+                                <label class="form-check-label" for="cooking">Cooking</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="gaming">
+                                <label class="form-check-label" for="gaming">Gaming</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="activityTypes">What types of activities do you prefer? (Select all that apply)</label><br>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="outdoor">
+                                <label class="form-check-label" for="outdoor">Outdoor</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="indoor">
+                                <label class="form-check-label" for="indoor">Indoor</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="solo">
+                                <label class="form-check-label" for="solo">Solo</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="group">
+                                <label class="form-check-label" for="group">Group</label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="showStep(2)">Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="showStep(4)">Next</button>
+                    </div>
+
+                    <div id="step4" class="d-none">
+                        <div class="form-group">
+                            <label for="physicalLevel">What physical levels of activity do you prefer? (Select all that apply)</label><br>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="lowImpact">
+                                <label class="form-check-label" for="lowImpact">Low impact</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="moderateImpact">
+                                <label class="form-check-label" for="moderateImpact">Moderate impact</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="highEnergy">
+                                <label class="form-check-label" for="highEnergy">High energy</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="limitations">Do you have any physical limitations or preferences? (Select one)</label><br>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="disability" id="noDisability" value="No disability">
+                                <label class="form-check-label" for="noDisability">No disability</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="disability" id="hearingImpairment" value="Hearing impairment">
+                                <label class="form-check-label" for="hearingImpairment">Hearing impairment</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="disability" id="visualImpairment" value="Visual impairment">
+                                <label class="form-check-label" for="visualImpairment">Visual impairment</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="disability" id="mobilityIssues" value="Mobility issues">
+                                <label class="form-check-label" for="mobilityIssues">Mobility issues (trouble walking/standing)</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="disability" id="otherLimitations" value="Other limitations" onclick="toggleOtherField()">
+                                <label class="form-check-label" for="otherLimitations">Other (please specify)</label>
+                            </div>
+                            <input type="text" id="limitationsOther" class="form-control d-none" placeholder="Please specify">
+                        </div>
+                        <div class="form-group">
+                            <label for="primaryGoal">What is your primary goal for engaging in new activities? (Select all that apply)</label><br>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="selfImprovement">
+                                <label class="form-check-label" for="selfImprovement">Self-improvement</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="fitness">
+                                <label class="form-check-label" for="fitness">Fitness</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="socializing">
+                                <label class="form-check-label" for="socializing">Socializing</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="havingFun">
+                                <label class="form-check-label" for="havingFun">Having fun</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="learningNewSkills">
+                                <label class="form-check-label" for="learningNewSkills">Learning new skills</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="reducingStress">
+                                <label class="form-check-label" for="reducingStress">Reducing stress</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="increasingProductivity">
+                                <label class="form-check-label" for="increasingProductivity">Increasing productivity</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">What is your budget for activities? (Select all that apply)</label><br>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="free" value="Free">
+                                <label class="form-check-label" for="free">Free</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="lowCost" value="Low cost">
+                                <label class="form-check-label" for="lowCost">Low cost</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="willingToInvest" value="Willing to invest">
+                                <label class="form-check-label" for="willingToInvest">Willing to invest</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">How much time do you typically have for activities?</label><br>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="time" id="timeLessThan1Hour" value="Less than 1 hour" required>
+                                <label class="form-check-label" for="timeLessThan1Hour">Less than 1 hour</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="time" id="time1To2Hours" value="1-2 hours">
+                                <label class="form-check-label" for="time1To2Hours">1-2 hours</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="time" id="time2To4Hours" value="2-4 hours">
+                                <label class="form-check-label" for="time2To4Hours">2-4 hours</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="time" id="timeMoreThan4Hours" value="More than 4 hours">
+                                <label class="form-check-label" for="timeMoreThan4Hours">More than 4 hours</label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary w-100" onclick="showStep(3)">Previous</button>
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    </div>
+                </form>
+            </div>    
         </div>
-    </main>
+    </div>
+</main>
+
+<script>
+    function showStep(step) {
+        // Hide all steps
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById('step' + i).classList.add('d-none');
+        }
+        // Show the selected step
+        document.getElementById('step' + step).classList.remove('d-none');
+    }
+    
+    function toggleOtherField() {
+        const otherLimitationsRadio = document.getElementById('otherLimitations');
+        const textBox = document.getElementById('limitationsOther');
+        
+        // Show or hide the text box based on the 'Other' radio button
+        if (otherLimitationsRadio.checked) {
+            textBox.classList.remove('d-none');
+        } else {
+            textBox.classList.add('d-none');
+            textBox.value = ''; // Clear the text box value when hiding
+        }
+    }
+    
+    
+</script>
+
 {% endblock %}

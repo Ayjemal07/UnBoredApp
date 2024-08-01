@@ -30,7 +30,8 @@ def signup():
 
 
             flash(f'You have successfully created a user account {email}', 'User-created')
-            return redirect(url_for('main.index'))
+            print(email,password)
+            return redirect(url_for('auth.signin'))
         
     except:
         raise Exception('Invalid form data: Please check your form')
@@ -49,7 +50,7 @@ def signin():
 
             logged_user = User.query.filter(User.email == email).first()
             if logged_user and check_password_hash(logged_user.password, password):
-                login_user(logged_user)
+                login_user(logged_user, password)
                 flash('You were successful in your initiation. Congratulations, and welcome to the Jedi Knights', 'auth-success')
                 return redirect(url_for('main.profile'))
             else:

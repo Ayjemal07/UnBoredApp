@@ -431,6 +431,79 @@ h1 {
     padding: 5px 10px;
 }
 
+
+/* Sign Up Form Styling */
+
+.custom-width {
+    width: 80%; /* Or any desired width */
+    max-width: 100%; /* Ensure it does not exceed the container width */
+}
+
+.form-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem; /* Increase padding to make the form look larger */
+    max-width: 600px; /* Set a maximum width for the form card */
+    margin: 0 auto; /* Center the form card horizontally */
+    width: 100%; /* Ensure it uses the full width of the column */
+
+}
+
+
+
+.form-control {
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+    padding: 0.75rem; /* Increase padding for form controls */
+    font-size: 1rem; /* Ensure font size is appropriate */
+    width: 100%; /* Full width of the form control's container */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #00408d;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Radio and Checkbox Styling */
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.form-check-label {
+    margin-left: 0.5rem;
+}
+
+
+
+
+/* Responsive Design */
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .suggestion-button, .next-suggest {
@@ -490,4 +563,6 @@ h1 {
     .navigation li {
         margin: 10px 0; /* Adjust margin for navigation links */
     }
+
+
 }

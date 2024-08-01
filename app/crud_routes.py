@@ -91,6 +91,7 @@ def get_token():
 
     logged_user = User.query.filter(User.email == email).first()
     if logged_user and check_password_hash(logged_user.password, password):
+        print(logged_user,password)
         return jsonify({'token': logged_user.token}), 200
     
     else:
