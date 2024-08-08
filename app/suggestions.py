@@ -1,6 +1,7 @@
 #This file contains routes/blueprints
 
 from flask import Blueprint, jsonify, render_template, session, request
+from flask_login import current_user  # Import current_user here
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -76,7 +77,7 @@ def get_youtube_link(activity_name):
 
 
 # Function to get Google search link
-def get_google_link(activity_name):
+def get_google_link(activity_name,):
     query = f"{activity_name} near me"
     return f"https://www.google.com/search?q={query.replace(' ', '+')}"
 
@@ -86,32 +87,45 @@ def get_meetup_link(activity_name):
     return f"https://www.meetup.com/find/?keywords={query.replace(' ', '%20')}"
 
 # Function to get random activity details
-def get_chatgpt_activity(exclude_activities):
+def get_chatgpt_activity(exclude_activities,user_exists=False):
 
     exclude_list = ', '.join(exclude_activities) if exclude_activities else ''
 
-    if exclude_activities:
-        prompt1 = f"""Think before you reply. Be creative!
-        You are helping someone find a fun and engaging activity/hobby. 
-        Suggest one activity that is enjoyable and worth trying, but 
-        exclude activies from the the following list:
-        {exclude_list}. 
-        Give me just the name of the activity only."""
+
+    if user_exists:
+        user_info={
+            'interests': current_user.interests,
+            'physical limitations': current_user.limitations,
+            'user"s age': current_user.age,
+            'types of activities interested':current_user.activity_types,
+            'physical effort levels interested':current_user.physical_levels,
+            'budget':current_user.budget,
+            }
+                                       
+        prompt1 = f"""You are an expert in recommending activities and hobbies. 
+        Based on the following user profile:{user_info},
+        Suggest a single activity that fits the user's preferences and constraints. 
+        Exclude activities from this list: {exclude_list}. 
+        Ensure the activity name is concise and does not exceed 31 characters. 
+        Provide only the activity name."""
+        print(user_info)
 
     else:
-        prompt1="""Think before you reply and be creative!
-        You are helping someone find a fun and engaging activity to do. 
-        Suggest one activity that is enjoyable and worth trying.  
-        Give me just the name of the activity only."""
+        prompt1=f"""You are an expert in recommending activities and hobbies. 
+        Suggest one activity that is enjoyable and worth trying. 
+        Exclude activities from this list: {exclude_list}. 
+        Ensure the activity name is concise and does not exceed 31 characters. 
+        Provide only the activity name."""
 
         
     response1 = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=[
-            {"role": "system", "content": "You answer questions about Web services."},
+            {"role": "system", "content": "You are an assistant providing activity and hobby suggestions."},
             {"role": "user", "content": prompt1},
         ],
-        temperature=1,
+        temperature=0.5,
+        top_p=0.8
     )
 
     name = response1.choices[0].message.content.strip()
@@ -124,7 +138,7 @@ def get_chatgpt_activity(exclude_activities):
     response2 = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=[
-            {"role": "system", "content": "You answer questions about Web services."},
+            {"role": "system", "content": "You are an assistant providing activity and hobby suggestions."},
             {"role": "user", "content": prompt2},
         ],
         temperature=0.3,
@@ -140,7 +154,7 @@ def get_chatgpt_activity(exclude_activities):
     response3 = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=[
-            {"role": "system", "content": "You answer questions about Web services."},
+            {"role": "system", "content": "You are an assistant providing activity and hobby suggestions."},
             {"role": "user", "content": prompt3},
         ],
         temperature=0.3,
@@ -177,6 +191,9 @@ def profile():
 @main.route('/suggest_activity', methods=['GET'])
 def suggest_activity():
     click_count = int(request.args.get('clickCount', 0))
+    user_exists = current_user.is_authenticated  # Adjust based on your user authentication method
+    print(user_exists)
+
 
     if 'seen_activities' not in session:
         session['seen_activities'] = []
@@ -196,7 +213,7 @@ def suggest_activity():
 
     else:
         print("here")
-        selected_activity = get_chatgpt_activity(seen_activities)
+        selected_activity = get_chatgpt_activity(seen_activities,user_exists)
         seen_activities.append(selected_activity['name'])
         print(seen_activities)
     

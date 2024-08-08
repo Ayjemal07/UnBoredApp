@@ -12,6 +12,7 @@ body {
     align-items: center;
     justify-content: center;
     font-family: Arial, sans-serif;
+    line-height: 1.3 !important;
 }
 
 *, *::before, *::after {
@@ -27,6 +28,8 @@ body {
     padding-top: 10px;
     margin-bottom: 50px;
 }
+
+
 
 /* Buttons */
 .suggestion-button{
@@ -46,14 +49,14 @@ body {
 
 
 .next-suggest{
-    width: 235px;
-    padding: 22px; /* Increase padding for a bigger button */
-    font-size: 18px; /* Increase font size for larger text */
+    width: 116px;
+    padding: 15px; /* Increase padding for a bigger button */
+    font-size: 17px; /* Increase font size for larger text */
     font-weight: bold;
     color: white;
     background: linear-gradient(90deg, #4caf50, #7bdcb5); /* Greenish bright gradient */
     border: none;
-    border-radius: 10px; /* Increase border-radius for a more rounded button */
+    border-radius: 26px; /* Increase border-radius for a more rounded button */
     cursor: pointer;
     transition: background 0.3s ease; /* Smooth transition for hover effect */
     margin-top: 10px;
@@ -80,7 +83,7 @@ body {
 
 .next-suggest {
     position: absolute;
-    bottom: -3px;
+    bottom: -8px;
     right: -25px; /* Adjust positioning from the right */
     display: none; /* Initially hidden */
 }
@@ -122,7 +125,6 @@ button:disabled {
 }
 
 .top-picks {
-    font-size: 1.7em;
     margin-right: 20px;
     color: #000;
     white-space: nowrap;
@@ -149,7 +151,7 @@ button:disabled {
 .slider__list {
     display: flex;
     list-style: none;
-    padding: 0;
+    padding: 12px;
     margin: 0;
     transition: transform 0.5s ease;
 }
@@ -207,8 +209,8 @@ button:disabled {
     display: inline-block;
     padding: 10px 20px;
     background-color: black;
-    color: white;
-    text-decoration: none;
+    color: white !important; 
+    text-decoration: none !important;
     border-radius: 4px;
     margin-top: 10px;
     cursor: pointer;
@@ -217,7 +219,7 @@ button:disabled {
 
 .nav-button {
     position: absolute;
-    top: 32%;
+    top: 29%;
     transform: translateY(-50%);
     background-color: black;
     color: white;
@@ -225,7 +227,7 @@ button:disabled {
     padding: 10px;
     cursor: pointer;
     z-index: 1;
-    font-size: 32px;
+    font-size: 28px;
     transition: background-color 0.3s ease;
 }
 
@@ -234,7 +236,7 @@ button:disabled {
 }
 
 .prev-button {
-    left: 0px; /* Adjust this value to move the button outside the last card */
+    left: 10px; /* Adjust this value to move the button outside the last card */
 }
 
 .next-button {
@@ -272,7 +274,7 @@ button:disabled {
 }
 
 .activity-card h2 {
-    font-size: 29px; /* Reduce font size */
+    font-size: 25px; /* Reduce font size */
     color: #1a5319; /* Dark green color for the title */
     background-color: hwb(0 96% 4%); /* Light background color for contrast */
     padding: 5px; /* Reduce padding around text */
@@ -285,7 +287,7 @@ button:disabled {
 }
 
 .activity-card p {
-    font-size: 22px; /* Reduce font size */
+    font-size: 18px; /* Reduce font size */
     color: #5a5a5a; /* Slightly darker grey */
     margin-bottom: 4px; /* Reduce margin-bottom */
     font-family: 'Georgia', serif; /* Change the font */
@@ -293,32 +295,36 @@ button:disabled {
     border-radius: 5px;
 }
 
-.activity-card a {
+/* Activity Card Link Styles */
+.activity-card a,
+.button-container a {
     display: inline-block;
-    font-size: 21px; /* Reduce font size */
-    color: #fff; /* Set text color to white */
-    text-decoration: none;
+    font-size: 19px; /* Reduce font size */
+    color: #fff !important; /* Set text color to white */
+    text-decoration: none !important;
     padding: 5px 9px; /* Adjust padding */
     border: 3px solid #495f49;
     border-radius: 8px; /* Adjust border-radius */
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    box-shadow: 0 2px 4px rgba(70, 66, 66, 0.2); /* Add a shadow for depth */
-    background-color: #57a554; /* Set background color to green */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s !important;
+    box-shadow: navy !important; /* Add a shadow for depth */
+    background-color: #57a554 !important; /* Set background color to green */
+}
+
+.activity-card a:hover,
+.button-container a:hover {
+    animation: flash 0.2s ease-in-out forwards !important; /* Trigger animation on hover */
 }
 
 @keyframes flash {
     from { background-color: #57a554; } /* Start with green background */
-    to { background-color: #2d572c; } /* Flash to white */
-}
-
-.activity-card a:hover {
-    animation: flash 0.2s ease-in-out forwards; /* Trigger animation on hover */
+    to { background-color: #2d572c; } /* Flash to darker green */
 }
 
 /* Flexbox layout for buttons */
 .button-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 5px; /* Space between buttons */
     margin-top: 15px; /* Space between content and buttons */
@@ -326,11 +332,9 @@ button:disabled {
 
 .flex-container {
     display: flex;
-    flex-direction: row;
     align-items: flex-start; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
     flex-wrap: wrap; /* Ensure items wrap on smaller screens */
-    gap: 10px; /* Adjust gap as needed */
+    gap: 7px; /* Adjust gap as needed */
 }
 
 /* Player container */
@@ -364,8 +368,7 @@ h1 {
     text-align: center;
     font-size: 35px;
     color: #1b471e;
-    margin-top:10px;
-    margin-bottom: -14px;
+    margin-top:35px !important;
 }
 
 /* Spinner */
@@ -395,7 +398,7 @@ h1 {
     width: 100%;
     list-style: none;
     margin: 0;
-    padding: 15px 20px;
+    padding: 10px 15px;
     display: flex;
     align-items: center;
     background-color: #aabbaa; /* Optional background color */
@@ -425,27 +428,56 @@ h1 {
     margin-left: 20px;
 }
 
-.navigation a {
+.nav-link {
+    font-size: 1.3em;
+    color: rgb(6, 59, 6);
     text-decoration: none;
-    color: #2d333a;
-    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: rgb(27, 150, 27); /* Gold color on hover */
+}
+
+.nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: white; /* Gold color for underline */
+    transition: width 0.3s;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: white; /* Gold color for active link */
+}
+
+.nav-link.active::after {
+    width: 100%;
 }
 
 
 /* Sign Up Form Styling */
 
-.custom-width {
-    width: 80%; /* Or any desired width */
-    max-width: 100%; /* Ensure it does not exceed the container width */
-}
+
 
 .form-card {
     background-color: #fff;
     border-radius: 8px;
     padding: 2rem; /* Increase padding to make the form look larger */
-    max-width: 600px; /* Set a maximum width for the form card */
+    max-width: 660px; /* Set a maximum width for the form card */
     margin: 0 auto; /* Center the form card horizontally */
     width: 100%; /* Ensure it uses the full width of the column */
+    font-size:20px;
 
 }
 

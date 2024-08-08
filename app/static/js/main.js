@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextSuggestButton = document.createElement('button');
     nextSuggestButton.id = 'next-suggest';
     nextSuggestButton.className = 'next-suggest';
-    nextSuggestButton.innerHTML = 'Next suggestion <span class="arrow-right"></span><span class="arrow-right"></span><span class="arrow-right"></span>';
+    nextSuggestButton.innerHTML = 'NEXT <span class="arrow-right"></span><span class="arrow-right"></span><span class="arrow-right"></span>';
     nextSuggestButton.style.display = 'none'; // Initially hidden
     nextSuggestButton.disabled = true; // Initially disabled
 
@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p>${data.description}</p>
                         <p>Why should you do this activity?<br><span>${data.why_worth}</span></p>
                         <div class="button-container">
-                            <a href="${data.meetup}" target="_blank">Join ${data.name} Meetup</a><br>
+                            <a href="${data.meetup}" target="_blank">Join Meetups of this activity</a><br>
                             <a href="${data.google}" target="_blank">Google this activity near you</a>
-                            <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch more videos of this activity</a><br>
+                            <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch more videos</a><br>
                         </div>
                     </div>
                 </div>
-                <button id="next-suggest" class="next-suggest">Next suggestion 
+                <button id="next-suggest" class="next-suggest">Next
                 <span class="arrow-right"></span>
                 <span class="arrow-right"></span>
                 <span class="arrow-right"></span>

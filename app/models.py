@@ -36,21 +36,36 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
-    first_name = db.Column(db.String(150), nullable=True, default='')
-    last_name = db.Column(db.String(150), nullable = True, default = '')
-    email = db.Column(db.String(150), nullable = False)
-    password = db.Column(db.String, nullable = True, default = '')
-    g_auth_verify = db.Column(db.Boolean, default = False)
-    token = db.Column(db.String, default = '', unique = True )
-    date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
-    # default_duration=db.Column(db.Integer,nullable=True)
+    customer_name = db.Column(db.String(150), nullable=True, default='')
+    email = db.Column(db.String(150), nullable=False)
+    password = db.Column(db.String, nullable=True, default='')
+    age = db.Column(db.Integer, nullable=True)
+    location = db.Column(db.String(300), nullable=True)
+    interests = db.Column(db.String, nullable=True)
+    activity_types = db.Column(db.String, nullable=True)
+    physical_levels = db.Column(db.String, nullable=True)
+    limitations = db.Column(db.String, nullable=True)
+    primary_goals = db.Column(db.String, nullable=True)
+    budget = db.Column(db.String, nullable=True)
+    available_time = db.Column(db.String, nullable=True)
+    g_auth_verify = db.Column(db.Boolean, default=False)
+    token = db.Column(db.String, default='', unique=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    def __init__(self, email, first_name='', last_name='', password='', token='', g_auth_verify=False):
+    def __init__(self, email, password='', customer_name='', age=None, location='', interests='', activity_types='', physical_levels='', limitations='', primary_goals='', budget='', available_time='', token='', g_auth_verify=False):
         self.id = self.set_id()
-        self.first_name = first_name
-        self.last_name = last_name
-        self.password = self.set_password(password)
         self.email = email
+        self.password = self.set_password(password)
+        self.customer_name = customer_name
+        self.age = age
+        self.location = location
+        self.interests = interests
+        self.activity_types = activity_types
+        self.physical_levels = physical_levels
+        self.limitations = limitations
+        self.primary_goals = primary_goals
+        self.budget = budget
+        self.available_time = available_time
         self.token = self.set_token(24)
         self.g_auth_verify = g_auth_verify
 
@@ -59,13 +74,14 @@ class User(db.Model, UserMixin):
 
     def set_id(self):
         return str(uuid.uuid4())
-    
+
     def set_password(self, password):
         self.pw_hash = generate_password_hash(password)
         return self.pw_hash
 
     def __repr__(self):
         return f'User {self.email} has been added to the database'
+
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
