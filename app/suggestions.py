@@ -106,7 +106,7 @@ def get_chatgpt_activity(exclude_activities,user_exists=False):
         Based on the following user profile:{user_info},
         Suggest a single activity that fits the user's preferences and constraints. 
         Exclude activities from this list: {exclude_list}. 
-        Ensure the activity name is concise and does not exceed 31 characters. 
+        Ensure the activity name is concise and does not exceed 25 characters. 
         Provide only the activity name."""
         print(user_info)
 
@@ -114,7 +114,7 @@ def get_chatgpt_activity(exclude_activities,user_exists=False):
         prompt1=f"""You are an expert in recommending activities and hobbies. 
         Suggest one activity that is enjoyable and worth trying. 
         Exclude activities from this list: {exclude_list}. 
-        Ensure the activity name is concise and does not exceed 31 characters. 
+        Ensure the activity name is concise and does not exceed 25 characters. 
         Provide only the activity name."""
 
         
@@ -124,16 +124,15 @@ def get_chatgpt_activity(exclude_activities,user_exists=False):
             {"role": "system", "content": "You are an assistant providing activity and hobby suggestions."},
             {"role": "user", "content": prompt1},
         ],
-        temperature=0.5,
         top_p=0.8
-    )
+    )  
 
     name = response1.choices[0].message.content.strip()
 
     # Second prompt to get the activity description
     prompt2 = f"""Double check your work before you reply.
     Provide a one-sentence description of what is {name}. 
-    Character limit is strictly less than 130"""
+    Character limit is strictly less than 120"""
 
     response2 = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -149,7 +148,8 @@ def get_chatgpt_activity(exclude_activities,user_exists=False):
     # Third prompt to get the reason why it's worth trying
     prompt3 = f"""Double check your work before you reply. 
     Explain in one-sentence why {name} is worth trying.
-    Character limit for the sentence is strictly less than 130"""
+    Character limit for the sentence is strictly less than 120. Start with saying 
+    "It's good for..." or "It offers..." or "It helps with..." """
 
     response3 = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -201,6 +201,7 @@ def suggest_activity():
     seen_activities = session['seen_activities']
 
     cherry_pick_activities = Activity.query.filter_by(cherry_picked=True).all()
+    
     cherry_pick_activities = [activity for activity in cherry_pick_activities if activity.name not in seen_activities]
 
     selected_activity = None

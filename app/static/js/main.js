@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('YouTube URL:', data.youtube);
 
             const embedUrl = `https://www.youtube-nocookie.com/embed/${currentVideoId}?origin=${window.location.origin}`;
-
             // Clear previous content
             activityContainer.innerHTML = '';
 
@@ -86,17 +85,28 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p>${data.description}</p>
                         <p>Why should you do this activity?<br><span>${data.why_worth}</span></p>
                         <div class="button-container">
-                            <a href="${data.meetup}" target="_blank">Join Meetups of this activity</a><br>
-                            <a href="${data.google}" target="_blank">Google this activity near you</a>
-                            <a href="https://www.youtube.com/results?search_query=what+is+${data.name}" target="_blank">Watch more videos</a><br>
+                            <a href="${data.meetup}" target="_blank">Meetup</a>
+                            <a href="${data.google}" target="_blank">Google</a>
                         </div>
                     </div>
                 </div>
-                <button id="next-suggest" class="next-suggest">Next
-                <span class="arrow-right"></span>
-                <span class="arrow-right"></span>
-                <span class="arrow-right"></span>
-                </button>
+                <div class="action-buttons-container">
+                    <button id="like-button" class="like-button">
+                        <span class="heart">&#9825;</span>
+                        <span class="like-text">Like</span>
+                    </button>
+                    <button id="share-button" class="share-button">
+                        <span <i class="fa-sharp-duotone fa-solid fa-arrow-up-from-bracket" 
+                        style="--fa-primary-color: #376228; --fa-secondary-color: #376228;"></i></span> 
+                        <span class="share-text">Share</span>
+                    </button>
+                    <button id="next-suggest" class="next-suggest">
+                        Next
+                        <span class="arrow-right"></span>
+                        <span class="arrow-right"></span>
+                        <span class="arrow-right"></span>
+                    </button>
+                </div>
             `;
 
             activityCard.appendChild(nextSuggestButton);
@@ -108,6 +118,41 @@ document.addEventListener('DOMContentLoaded', function () {
             nextSuggestButton.disabled = false; // Enable button
 
             spinner.style.display = 'none';
+
+            // Event listener for like button (heart toggle)
+            const likeButton = document.getElementById('like-button');
+            likeButton.addEventListener('click', () => {
+                if (likeButton.classList.contains('liked')) {
+                    likeButton.classList.remove('liked');
+                    likeButton.innerHTML = '&#9825;'; // Empty heart
+                } else {
+                    likeButton.classList.add('liked');
+                    likeButton.innerHTML = '&#9829;'; // Filled red heart
+                }
+            });
+
+            // Event listener for share button
+            const shareButton = activityCard.querySelector('#share-button');
+            shareButton.addEventListener('click', () => {
+                const shareMessage = `
+                    Check out this activity:
+                    - Activity: ${upperCasedActivityName}
+                    - Description: ${data.description}
+                    - Why it's worth doing: ${data.why_worth}
+                    - Join Meetups: ${data.meetup}
+                    - Google this activity near you: ${data.google}
+                `;
+                
+                // Copy shareMessage to clipboard (you can also use a messaging service)
+                navigator.clipboard.writeText(shareMessage)
+                    .then(() => {
+                        alert('Activity details copied! Now share it with your friends.');
+                    })
+                    .catch(err => {
+                        console.error('Error copying text: ', err);
+                    });
+            });
+            
 
         } catch (error) {
             console.error('Error displaying activity:', error);

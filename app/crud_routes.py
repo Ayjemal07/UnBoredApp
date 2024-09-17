@@ -42,36 +42,62 @@ def add_activity():
     name = data.get('name')
     description = data.get('description')
     why_worth = data.get('why_worth')
-    youtube_link=data.get('youtube_link')
-    google_link=data.get('google_link')
-    meetup_link=data.get('meetup_link')
+    youtube_link = data.get('youtube_link')
+    google_link = data.get('google_link')
+    meetup_link = data.get('meetup_link')
+    tags = data.get('tags', [])  # Default to empty list if not provided
 
     if not all([name, description, why_worth]):
         return jsonify({'error': 'Missing required fields'}), 400
 
-    new_activity = Activity(name=name, description=description, why_worth=why_worth,youtube_link=youtube_link,google_link=google_link,meetup_link=meetup_link)
+    # Ensure tags is a list
+    if not isinstance(tags, list):
+        return jsonify({'error': 'Tags should be a list'}), 400
+
+    new_activity = Activity(
+        name=name,
+        description=description,
+        why_worth=why_worth,
+        youtube_link=youtube_link,
+        google_link=google_link,
+        meetup_link=meetup_link,
+        tags=tags
+    )
 
     db.session.add(new_activity)
     db.session.commit()
 
     return jsonify({'message': 'Activity added successfully', 'id': new_activity.id}), 201
 
+
 @crud.route('/activities/<int:id>', methods=['PUT'])
 def update_activity(id):
     activity = Activity.query.get_or_404(id)
     data = request.json
 
+    # Check for at least one field to be updated
+    if not any(key in data for key in ['name', 'description', 'why_worth', 'youtube_link', 'google_link', 'meetup_link', 'tags']):
+        return jsonify({'error': 'No fields to update'}), 400
+
+    # Update fields if provided
     activity.name = data.get('name', activity.name)
     activity.description = data.get('description', activity.description)
     activity.why_worth = data.get('why_worth', activity.why_worth)
-    activity.youtube_link=data.get('youtube_link',activity.youtube_link)
-    activity.google_link=data.get('google_link',activity.google_link)
-    activity.meetup_link=data.get('meetup_link',activity.meetup_link)
+    activity.youtube_link = data.get('youtube_link', activity.youtube_link)
+    activity.google_link = data.get('google_link', activity.google_link)
+    activity.meetup_link = data.get('meetup_link', activity.meetup_link)
 
+    # Handle the tags update
+    tags = data.get('tags')
+    if tags is not None:
+        if not isinstance(tags, list):
+            return jsonify({'error': 'Tags should be a list'}), 400
+        activity.tags = tags
 
     db.session.commit()
 
     return jsonify({'message': 'Activity updated successfully'}), 200
+
 
 @crud.route('/activities/<int:id>', methods=['DELETE'])
 def delete_activity(id):

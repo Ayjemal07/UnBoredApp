@@ -17,7 +17,7 @@
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="showStep(2)">Next</button>
+                        <button type="button" class="btn btn-primary" onclick="validateStep(1)">Next</button>
                     </div>
 
                     <div id="step2" class="d-none">
@@ -34,7 +34,7 @@
                             <input type="text" class="form-control" id="location" name="location" required>
                         </div>
                         <button type="button" class="btn btn-secondary" onclick="showStep(1)">Previous</button>
-                        <button type="button" class="btn btn-primary" onclick="showStep(3)">Next</button>
+                        <button type="button" class="btn btn-primary" onclick="validateStep(2)">Next</button>
                     </div>
 
                     <div id="step3" class="d-none">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <button type="button" class="btn btn-secondary" onclick="showStep(2)">Previous</button>
-                        <button type="button" class="btn btn-primary" onclick="showStep(4)">Next</button>
+                        <button type="button" class="btn btn-primary" onclick="validateStep(3)">Next</button>
                     </div>
 
                     <div id="step4" class="d-none">
@@ -141,34 +141,6 @@
                             <input type="text" id="limitationsOther" name="limitationsOther" class="form-control d-none" placeholder="Please specify">
                         </div>
                         <div class="form-group">
-                            <label for="primaryGoal">What is your primary goal for engaging in new activities? (Select all that apply)</label><br>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="selfImprovement" name="primaryGoal" value="Self-improvement">
-                                <label class="form-check-label" for="selfImprovement">Self-improvement</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="socialInteraction" name="primaryGoal" value="Social interaction">
-                                <label class="form-check-label" for="socialInteraction">Social interaction</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="relaxation" name="primaryGoal" value="Relaxation">
-                                <label class="form-check-label" for="relaxation">Relaxation</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="learning" name="primaryGoal" value="Learning new skills">
-                                <label class="form-check-label" for="learning">Learning new skills</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="fun" name="primaryGoal" value="Fun and enjoyment">
-                                <label class="form-check-label" for="fun">Fun and enjoyment</label>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-secondary" onclick="showStep(3)">Previous</button>
-                        <button type="button" class="btn btn-primary" onclick="showStep(5)">Next</button>
-                    </div>
-
-                    <div id="step5" class="d-none">
-                        <div class="form-group">
                             <label for="budget">What is your budget for activities? (Select all that apply)</label><br>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="free" name="budget" value="Free">
@@ -183,26 +155,7 @@
                                 <label class="form-check-label" for="willingToInvest">Willing to invest</label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="time">How much time do you typically have for activities?</label><br>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" name="available_time" id="timeLessThan1Hour" value="Less than 1 hour" required>
-                                <label class="form-check-label" for="timeLessThan1Hour">Less than 1 hour</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" name="available_time" id="time1To2Hours" value="1-2 hours">
-                                <label class="form-check-label" for="time1To2Hours">1-2 hours</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" name="available_time" id="time2To4Hours" value="2-4 hours">
-                                <label class="form-check-label" for="time2To4Hours">2-4 hours</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" name="available_time" id="timeMoreThan4Hours" value="More than 4 hours">
-                                <label class="form-check-label" for="timeMoreThan4Hours">More than 4 hours</label>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-secondary" onclick="showStep(4)">Previous</button>
+                        <button type="button" class="btn btn-secondary" onclick="showStep(3)">Previous</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
@@ -214,11 +167,58 @@
 <script>
     function showStep(stepNumber) {
         // Hide all steps
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 4; i++) {
             document.getElementById('step' + i).classList.add('d-none');
         }
         // Show the selected step
         document.getElementById('step' + stepNumber).classList.remove('d-none');
+    }
+
+    function validateStep(stepNumber) {
+        let isValid = false;
+        if (stepNumber === 1) {
+            // Validate email and password
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (email && password) {
+                isValid = true;
+            } else {
+                alert('Please fill out the email and password fields.');
+            }
+        } else if (stepNumber === 2) {
+            // Validate that at least one field is filled in Step 2
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const location = document.getElementById('location').value;
+            if (name && age && location) {
+                isValid = true;
+            } else {
+                alert('Please fill out all fields in this step.');
+            }
+        } else if (stepNumber === 3) {
+            // Validate that at least one checkbox is checked in Step 3
+            const interests = document.querySelectorAll('input[name="interests"]:checked').length > 0;
+            const activityTypes = document.querySelectorAll('input[name="activityTypes"]:checked').length > 0;
+            if (interests || activityTypes) {
+                isValid = true;
+            } else {
+                alert('Please select at least one interest or activity type.');
+            }
+        } else if (stepNumber === 4) {
+            // Validate that at least one checkbox is checked in Step 4
+            const physicalLevels = document.querySelectorAll('input[name="physicalLevel"]:checked').length > 0;
+            const limitations = document.querySelectorAll('input[name="limitations"]:checked').length > 0;
+            const budget = document.querySelectorAll('input[name="budget"]:checked').length > 0;
+            if (physicalLevels || limitations || budget) {
+                isValid = true;
+            } else {
+                alert('Please select at least one physical level, limitation, or budget.');
+            }
+        }
+
+        if (isValid) {
+            showStep(stepNumber + 1);
+        }
     }
 
     function toggleOtherField() {
@@ -229,15 +229,11 @@
             otherLimitationsField.classList.add('d-none');
         }
     }
-    
-
-    //Handling form submission
 
     document.getElementById('signupForm').addEventListener('submit', function(event) {
         event.preventDefault();
-    
         const formData = new FormData(this);
-    
+
         fetch(this.action, {
             method: 'POST',
             body: formData

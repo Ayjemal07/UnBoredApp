@@ -51,8 +51,10 @@ class User(db.Model, UserMixin):
     g_auth_verify = db.Column(db.Boolean, default=False)
     token = db.Column(db.String, default='', unique=True)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    liked_tags = db.Column(db.String)
 
-    def __init__(self, email, password='', customer_name='', age=None, location='', interests='', activity_types='', physical_levels='', limitations='', primary_goals='', budget='', available_time='', token='', g_auth_verify=False):
+
+    def __init__(self, email, password='', customer_name='', age=None, location='', interests='',liked_tags='', activity_types='', physical_levels='', limitations='', primary_goals='', budget='', available_time='', token='', g_auth_verify=False):
         self.id = self.set_id()
         self.email = email
         self.password = self.set_password(password)
@@ -60,6 +62,7 @@ class User(db.Model, UserMixin):
         self.age = age
         self.location = location
         self.interests = interests
+        self.liked_tags=liked_tags
         self.activity_types = activity_types
         self.physical_levels = physical_levels
         self.limitations = limitations
@@ -92,6 +95,8 @@ class Activity(db.Model):
     meetup_link = db.Column(db.String(500), nullable=False)
     google_link = db.Column(db.String(500), nullable=False)
     cherry_picked = db.Column(db.Boolean, default=False)
+    tags = db.Column(db.String(500), nullable=True)  # New field for tags
+
 
     def __repr__(self):
         return f'<Activity {self.name}>'
@@ -107,5 +112,6 @@ class Activity(db.Model):
             'google':self.google_link,
             'youtube':self.youtube_link,
             'meetup':self.meetup_link,
-            'cherry_picked': self.cherry_picked
+            'cherry_picked': self.cherry_picked,
+            'tags': self.tags.split(',') if self.tags else []  # Convert tags string to list
         }

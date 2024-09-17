@@ -30,13 +30,18 @@ def signup():
         try:
             db.session.add(user)
             db.session.commit()
-            flash(f'You have successfully created a user account {user.email}', 'User-created')
-            return redirect(url_for('auth.signin'))
+
+            # Automatically log the user in after successful signup
+            login_user(user)
+            
+            flash(f'Account created successfully, {user.email}! You are now logged in.', 'User-created')
+            return redirect(url_for('main.profile'))  # Redirect to profile or main page after login
         except Exception as e:
             db.session.rollback()
             flash('Error creating account. Please try again.', 'error')
 
     return render_template('sign_up.html')
+
 
 @auth.route('/signin', methods=['GET', 'POST'])
 def signin():

@@ -48,20 +48,99 @@ body {
 }
 
 
-.next-suggest{
+/* Container for all action buttons (Like, Share, Next Suggest) */
+.action-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 45px;
+    gap: 18px;
+    left:170px;
+}
+
+
+/* Like button */
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 35px;
+    color: green;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the spacing between the heart and text */
+    transition: color 0.3s ease;
+}
+
+.like-button .like-text {
+    display: none; /* Hide the text initially */
+    font-size: 16px;
+    color: gray ;
+}
+
+.like-button:hover .like-text {
+    display: inline; /* Show the text on hover */
+}
+
+.like-button:hover {
+    color: green; /* Optional: change the heart color on hover */
+}
+
+.like-button.liked .heart {
+    color: green; /* When liked, the heart becomes red */
+}
+
+
+.share-button {
+    color:rgb(85, 151, 85);
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the spacing between the icon and text */
+    transition: color 0.3s ease;
+}
+
+.share-button .share-text {
+    display: none; /* Hide the text initially */
+    font-size: 16px;
+    color: gray;
+}
+
+.share-button:hover .share-text {
+    display: inline; /* Show the text on hover */
+}
+
+.share-button .share-icon {
+    font-size: 30px; /* Adjust icon size */
+}
+
+/* You can add an additional liked state for share button if needed */
+
+
+/* Next Suggest button */
+.next-suggest {
     width: 116px;
-    padding: 15px; /* Increase padding for a bigger button */
-    font-size: 17px; /* Increase font size for larger text */
+    padding: 15px;
+    font-size: 17px;
     font-weight: bold;
     color: white;
-    background: linear-gradient(90deg, #4caf50, #7bdcb5); /* Greenish bright gradient */
+    background: linear-gradient(90deg, #4caf50, #7bdcb5);
     border: none;
-    border-radius: 26px; /* Increase border-radius for a more rounded button */
+    border-radius: 26px;
     cursor: pointer;
-    transition: background 0.3s ease; /* Smooth transition for hover effect */
-    margin-top: 10px;
-    
+    transition: background 0.3s ease;
+    margin-top: 0;
 }
+
+
 
 @keyframes flash {
     0%, 100% {
@@ -274,7 +353,7 @@ button:disabled {
 }
 
 .activity-card h2 {
-    font-size: 25px; /* Reduce font size */
+    font-size: 29px; /* Reduce font size */
     color: #1a5319; /* Dark green color for the title */
     background-color: hwb(0 96% 4%); /* Light background color for contrast */
     padding: 5px; /* Reduce padding around text */
@@ -287,7 +366,7 @@ button:disabled {
 }
 
 .activity-card p {
-    font-size: 18px; /* Reduce font size */
+    font-size: 20px; /* Reduce font size */
     color: #5a5a5a; /* Slightly darker grey */
     margin-bottom: 4px; /* Reduce margin-bottom */
     font-family: 'Georgia', serif; /* Change the font */
@@ -299,20 +378,21 @@ button:disabled {
 .activity-card a,
 .button-container a {
     display: inline-block;
-    font-size: 19px; /* Reduce font size */
-    color: #fff !important; /* Set text color to white */
+    font-size: 21px; /* Font size */
+    color: #495f49; /* Dark green text color */
     text-decoration: none !important;
-    padding: 5px 9px; /* Adjust padding */
-    border: 3px solid #495f49;
-    border-radius: 8px; /* Adjust border-radius */
-    transition: background-color 0.3s, color 0.3s, transform 0.3s !important;
-    box-shadow: navy !important; /* Add a shadow for depth */
-    background-color: #57a554 !important; /* Set background color to green */
+    padding: 5px 9px; /* Padding */
+    border: 3px solid #495f49; /* White border */
+    border-radius: 8px; /* Rounded borders */
+    background-color: transparent; /* No background initially */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s !important; /* Smooth transition */
 }
 
 .activity-card a:hover,
 .button-container a:hover {
-    animation: flash 0.2s ease-in-out forwards !important; /* Trigger animation on hover */
+    background-color: #2d572c; /* Dark green on hover */
+    color: white !important; /* White text on hover */
+    transform: scale(1.05); /* Slight scaling for hover effect */
 }
 
 @keyframes flash {
@@ -326,7 +406,7 @@ button:disabled {
     justify-content: center; /* Center the buttons horizontally */
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 5px; /* Space between buttons */
+    gap: 13px; /* Space between buttons */
     margin-top: 15px; /* Space between content and buttons */
 }
 
